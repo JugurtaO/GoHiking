@@ -1,0 +1,79 @@
+CREATE DATABASE IF NOT EXISTS JOhikes;
+USE JOhikes;
+
+
+CREATE TABLE IF NOT EXISTS  IF NOT EXISTS Users (
+   user_id INT PRIMARY KEY AUTO_INCREMENT,
+   user_nickname VARCHAR(512) NOT NULL,
+   user_email VARCHAR(512) UNIQUE
+
+  
+);
+
+CREATE TABLE IF NOT EXISTS Posts (
+   post_id INT PRIMARY KEY AUTO_INCREMENT,
+   post_title VARCHAR(1024) NOT NULL ,
+   post_body  TEXT NOT NULL,
+   -- postVotes INT NOT NULL DEFAULT 0,
+   postCreatedAt DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+   postUpdatedAt DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP, 
+   user_id INT NOT NULL,
+  
+   
+   CONSTRAINT POSTS_KEY FOREIGN KEY (user_id) REFERENCES Users(user_id)
+
+);
+
+
+
+CREATE TABLE IF NOT EXISTS Difficulties (
+   difficulty_level VARCHAR (128),
+   difficulty_duration INT NOT NULL,
+   difficulty_min_length INT NOT NULL,
+   difficulty_height_difference INT NOT NULL,
+   
+   CONSTRAINT Difficulties_PKEY PRIMARY KEY (difficulty_level),
+   CONSTRAINT DIFFICULTY_KEY CHECK (
+      difficulty_level = 'easy' AND  difficulty_height_difference =500  AND  difficulty_duration=3 OR
+      difficulty_level= 'medium' AND  difficulty_height_difference =800  AND  difficulty_duration=5 OR 
+      difficulty_level = 'hard' AND  difficulty_height_difference =1500 AND  difficulty_duration=10 )
+);
+
+
+CREATE TABLE IF NOT EXISTS Trails (
+   trail_id INT PRIMARY KEY AUTO_INCREMENT,
+   trail_name VARCHAR (128) NOT NULL,
+   trail_location VARCHAR (128) NOT NULL,
+   difficulty_level VARCHAR (128) NOT NULL,
+
+   
+   CONSTRAINT Trails_key FOREIGN KEY (difficulty_level) REFERENCES Difficulties(difficulty_level)
+ 
+);
+
+
+CREATE TABLE IF NOT EXISTS Hikes (
+   user_id INT NOT NULL,
+   trail_id INT NOT NULL,
+
+   CONSTRAINT HIKES_PKEY PRIMARY KEY (user_id,trail_id),
+   CONSTRAINT HIKES_FKEY1 FOREIGN KEY (user_id) REFERENCES Users(user_id),
+   CONSTRAINT HIKES_FKEY2 FOREIGN KEY (trail_id) REFERENCES trails(trail_id)
+ 
+);
+
+CREATE TABLE IF NOT EXISTS Likes (
+   user_id INT NOT NULL,
+   post_id INT NOT NULL,
+
+   CONSTRAINT HIKES_PKEY PRIMARY KEY (user_id,post_id),
+   CONSTRAINT HIKES_FKEY1 FOREIGN KEY (user_id) REFERENCES Users(user_id),
+   CONSTRAINT HIKES_FKEY2 FOREIGN KEY (post_id) REFERENCES Posts(post_id)
+ 
+);
+
+
+   
+  
+
+ SHOW TABLES;

@@ -1,23 +1,29 @@
-BD: JOhikes
+BD: JOhikes -- application de randonneurs-- elle vous permet de: 
+        - créer un profil utilisateur (sign up)
+        - ajouter des parcours dans la map des parcours existants
+        - supprimer des parcours existants
+        - publier des posts sur vos journée de randonnées
+        - laisser des commentaires sur des posts publiés
+        - aimer des posts
 
 Classes:
 
-USERS(randonneur): en tant que randonneur ,j'ai un id, un nom, prénom , date de naissance, email.
-                  en tant que randonneur je suis associé à des parcours
+Users(randonneur): en tant que randonneur ,j'ai un id, un nom, prénom , un email.
+                  en tant que randonneur je suis associé à des parcours (peux créer un parcours)
                   en tant que randonneur je peux créer des postes sur mes parcours
                   en tant que randonneur je peux commenter des postes
-                  en tant que randonneur je peux up/downovoter un post
+                  en tant que randonneur je peux liker  un post
                   
          
-POSTS: en tant que post j'ai un id,  un auteur, un titre, un contenu, nombre de votes, date de création et date de mise à jour 
+Posts: en tant que post j'ai un id,  un auteur, un titre, un contenu, nombre de likes, date de création et date de mise à jour 
 
-COMMENTS: en tant que commentaire j'ai un id, un auteur, un contenu, une date de création et une date de mise à jour
+Comments: en tant que commentaire j'ai un id, un auteur, un contenu, une date de création et une date de mise à jour
          en tant que commentaire je suis associé à un post
                   
                   
-PARCOURS: en tant que parcours j'ai un id, un nom, une localisation (nom de la ville), une durée, une longueur, un dénivelé, (un  niveau de difficulté qui dépend du dénivelé et de la durée)
+Trails: en tant que parcours j'ai un id, un nom, une localisation (nom de la ville), une durée, une longueur, un dénivelé, (un  niveau de difficulté qui dépend du dénivelé et de la durée)
 
-DIFFICULTÉS: en tant que  difficulté j'ai un niveau , une longueur maximale, un denivelé maximale et une durée maximale
+Difficulties: en tant que  difficulté j'ai un niveau , une longueur maximale, un denivelé maximale et une durée maximale
 
 
 
