@@ -17,7 +17,9 @@
     "@types/node": "^20.2.5",
     "dotenv": "^16.1.4",
     "express": "^4.18.2",
+    "mysql2": "^3.3.3",
     "rimraf": "^5.0.1",
+    "sequelize": "^6.32.0",
     "typescript": "^5.1.3"
   }
 }

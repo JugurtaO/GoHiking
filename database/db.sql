@@ -14,7 +14,6 @@ CREATE TABLE IF NOT EXISTS Posts (
    post_id INT PRIMARY KEY AUTO_INCREMENT,
    post_title VARCHAR(1024) NOT NULL ,
    post_body  TEXT NOT NULL,
-   -- postVotes INT NOT NULL DEFAULT 0,
    postCreatedAt DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
    postUpdatedAt DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP, 
    user_id INT NOT NULL,
@@ -34,9 +33,9 @@ CREATE TABLE IF NOT EXISTS Difficulties (
    
    CONSTRAINT Difficulties_PKEY PRIMARY KEY (difficulty_level),
    CONSTRAINT DIFFICULTY_KEY CHECK (
-      difficulty_level = 'easy' AND  difficulty_height_difference =500  AND  difficulty_duration=3 OR
+      difficulty_level = 'easy' AND  difficulty_height_difference =500  AND  difficulty_duration =3 OR
       difficulty_level= 'medium' AND  difficulty_height_difference =800  AND  difficulty_duration=5 OR 
-      difficulty_level = 'hard' AND  difficulty_height_difference =1500 AND  difficulty_duration=10 )
+      difficulty_level = 'hard' AND  difficulty_height_difference =1500 AND  difficulty_duration =10 )
 );
 
 
@@ -56,9 +55,9 @@ CREATE TABLE IF NOT EXISTS Hikes (
    user_id INT NOT NULL,
    trail_id INT NOT NULL,
 
-   CONSTRAINT HIKES_PKEY PRIMARY KEY (user_id,trail_id),
-   CONSTRAINT HIKES_FKEY1 FOREIGN KEY (user_id) REFERENCES Users(user_id),
-   CONSTRAINT HIKES_FKEY2 FOREIGN KEY (trail_id) REFERENCES trails(trail_id)
+   CONSTRAINT HIKES_KEY PRIMARY KEY (user_id,trail_id),
+   CONSTRAINT HIKESFKEY1 FOREIGN KEY (user_id) REFERENCES Users(user_id),
+   CONSTRAINT HIKESFKEY2 FOREIGN KEY (trail_id) REFERENCES Trails(trail_id)
  
 );
 
@@ -67,8 +66,8 @@ CREATE TABLE IF NOT EXISTS Likes (
    post_id INT NOT NULL,
 
    CONSTRAINT HIKES_PKEY PRIMARY KEY (user_id,post_id),
-   CONSTRAINT HIKES_FKEY1 FOREIGN KEY (user_id) REFERENCES Users(user_id),
-   CONSTRAINT HIKES_FKEY2 FOREIGN KEY (post_id) REFERENCES Posts(post_id)
+   CONSTRAINT HIKES_KEY1 FOREIGN KEY (user_id) REFERENCES Users(user_id),
+   CONSTRAINT HIKES_KEY2 FOREIGN KEY (post_id) REFERENCES Posts(post_id)
  
 );
 
