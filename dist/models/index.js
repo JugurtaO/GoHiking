@@ -17,6 +17,10 @@ exports.User = config_1.db_handler.define("User", {
     user_email: {
         type: sequelize_1.DataTypes.STRING(512),
         allowNull: false
+    },
+    user_password: {
+        type: sequelize_1.DataTypes.STRING(64),
+        allowNull: false
     }
 }, {
     tableName: "Users",

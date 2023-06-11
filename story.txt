@@ -16,11 +16,7 @@ Users(randonneur): en tant que randonneur ,j'ai un id, un nom, prénom , un emai
                   
          
 Posts: en tant que post j'ai un id,  un auteur, un titre, un contenu, nombre de likes, date de création et date de mise à jour 
-
-Comments: en tant que commentaire j'ai un id, un auteur, un contenu, une date de création et une date de mise à jour
-         en tant que commentaire je suis associé à un post
-                  
-                  
+       
 Trails: en tant que parcours j'ai un id, un nom, une localisation (nom de la ville), une durée, une longueur, un dénivelé, (un  niveau de difficulté qui dépend du dénivelé et de la durée)
 
 Difficulties: en tant que  difficulté j'ai un niveau , une longueur maximale, un denivelé maximale et une durée maximale

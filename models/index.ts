@@ -1,5 +1,5 @@
 
-import { Sequelize, DataTypes } from "sequelize";
+import { DataTypes } from "sequelize";
 import { db_handler } from "../database/config";
 
 //Creating an instance of User from Users entity
@@ -18,7 +18,11 @@ export const User = db_handler.define("User", {
         type: DataTypes.STRING(512),
         allowNull: false
 
-    }
+    },
+    user_password:{
+        type:DataTypes.STRING(64),
+        allowNull:false
+    } 
 
 },
     {
