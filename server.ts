@@ -11,14 +11,6 @@ dotenv.config();
 import {db_handler} from "./database/config";
  
 
-const jugurta=myModels.User.build({
-    user_id:1,
-    user_nickname:"Jugurta ourzik",
-    user_email:"jugurtaourzik@gmail.com"
-});
-
-console.log("!!!!!!!!!!!!! >>>>> ",jugurta instanceof myModels.User);
-
 //get connection to our DB
 db_handler.authenticate().then(() => {
     console.log("Successfully connected  to MySQL server");
@@ -26,6 +18,9 @@ db_handler.authenticate().then(() => {
     console.error('Ouups, cannot get connection to MySQL server!'+ error.message);
 }); 
  
+import * as controllers from "./controllers/index";
+
+app.get("/",controllers.renderHomePage);
  
 //make our app listen on port 3000
 const port: number = 3000;

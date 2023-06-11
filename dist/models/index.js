@@ -19,6 +19,7 @@ exports.User = config_1.db_handler.define("User", {
         allowNull: false
     }
 }, {
+    tableName: "Users",
     timestamps: true
 });
 //Creating an instance of Post from Posts entity
@@ -41,6 +42,7 @@ exports.Post = config_1.db_handler.define("Post", {
         allowNull: false
     }
 }, {
+    tableName: "Posts",
     timestamps: true
 });
 //Creating an instance of Difficulty from Difficulties entity
@@ -61,6 +63,9 @@ exports.Difficulty = config_1.db_handler.define("Difficulty", {
         type: sequelize_1.DataTypes.INTEGER,
         allowNull: false
     }
+}, {
+    tableName: "Difficulties",
+    timestamps: false
 });
 //Creating an instance of Trail from Trails entity
 exports.Trail = config_1.db_handler.define("Trail", {
@@ -81,26 +86,39 @@ exports.Trail = config_1.db_handler.define("Trail", {
         type: sequelize_1.DataTypes.STRING(128),
         allowNull: false
     }
+}, {
+    tableName: "Trails",
+    timestamps: false
 });
 //Creating an instance of Hike from Hikes entity
 exports.Hike = config_1.db_handler.define("Hike", {
     user_id: {
         type: sequelize_1.DataTypes.INTEGER,
-        allowNull: false
+        allowNull: false,
+        primaryKey: true
     },
     trail_id: {
         type: sequelize_1.DataTypes.INTEGER,
-        allowNull: false
+        allowNull: false,
+        primaryKey: true
     }
+}, {
+    tableName: "Hikes",
+    timestamps: false
 });
 //Creating an instance of Like from Likes entity
 exports.Like = config_1.db_handler.define("Like", {
     user_id: {
         type: sequelize_1.DataTypes.INTEGER,
-        allowNull: false
+        allowNull: false,
+        primaryKey: true
     },
     post_id: {
         type: sequelize_1.DataTypes.INTEGER,
-        allowNull: false
+        allowNull: false,
+        primaryKey: true
     }
+}, {
+    tableName: "Likes",
+    timestamps: false
 });

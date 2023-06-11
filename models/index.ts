@@ -22,6 +22,7 @@ export const User = db_handler.define("User", {
 
 },
     {
+        tableName: "Users",
         timestamps: true
     });
 
@@ -49,6 +50,7 @@ export const Post = db_handler.define("Post", {
 
 },
     {
+        tableName: "Posts",
         timestamps: true
     });
 
@@ -73,7 +75,11 @@ export const Difficulty = db_handler.define("Difficulty", {
         allowNull: false
     }
 
-});
+},
+    {
+        tableName: "Difficulties",
+        timestamps: false
+    });
 
 
 
@@ -97,31 +103,49 @@ export const Trail = db_handler.define("Trail", {
         type: DataTypes.STRING(128),
         allowNull: false
     }
-});
+},
+    {
+        tableName: "Trails",
+        timestamps: false
+    });
 
 //Creating an instance of Hike from Hikes entity
 export const Hike = db_handler.define("Hike", {
 
     user_id: {
         type: DataTypes.INTEGER,
-        allowNull: false
+        allowNull: false,
+        primaryKey:true
     },
     trail_id: {
         type: DataTypes.INTEGER,
-        allowNull: false
+        allowNull: false,
+        primaryKey:true
     }
 
-});
+},
+    {
+        tableName: "Hikes",
+        timestamps: false
+    });
 
 //Creating an instance of Like from Likes entity
 export const Like = db_handler.define("Like", {
 
     user_id: {
         type: DataTypes.INTEGER,
-        allowNull: false
+        allowNull: false,
+        primaryKey:true
     },
     post_id: {
         type: DataTypes.INTEGER,
-        allowNull: false
+        allowNull: false,
+        primaryKey:true
     }
-})
+},
+    {
+        tableName: "Likes",
+        timestamps: false
+    })
+
+
