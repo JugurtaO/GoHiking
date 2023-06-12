@@ -13,6 +13,6 @@ export  const postSignup=async (req: Request,res: Response)=>{
 
     
     
-    res.send("OK.");
+    return res.send("OK.");
 
 }

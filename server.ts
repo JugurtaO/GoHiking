@@ -1,7 +1,6 @@
 //requiring some stuff for our app
 import express from "express";
 import dotenv from "dotenv";
-import Router from "./routes/index";
 
 
 
@@ -12,7 +11,13 @@ const app= express();
 dotenv.config();
 import {db_handler} from "./database/config";
 
- 
+
+// SETUP OUR EXPRESS APP SETTINGS 
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+
+
 
 //get connection to our DB
 db_handler.authenticate().then(() => {
@@ -20,11 +25,14 @@ db_handler.authenticate().then(() => {
 }).catch((error: Error) => {
     console.error('Ouups, cannot get connection to MySQL server!'+ error.message);
 });  
-  
 
 
-//use routes
- app.use(Router);
+
+//use routes 
+import Router from "./routes/index";
+app.use(Router);
+
+ 
 //make our app listen on port 3000
 const PORT= process.env.PORT || 3000;
 app.listen(PORT, () => {

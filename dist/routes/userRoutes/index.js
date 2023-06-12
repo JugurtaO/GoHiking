@@ -31,7 +31,7 @@ const userControllers = __importStar(require("../../controllers/userControllers/
 const userRouter = express_1.default.Router();
 userRouter.get("/login", userControllers.getLogin);
 userRouter.get("/signup", userControllers.getSignup);
-userRouter.get("profile", userControllers.getProfile);
-userRouter.post("login", userControllers.postLogin);
-userRouter.post("signup", userControllers.postSignup);
+userRouter.get("/profile", userControllers.getProfile);
+userRouter.post("/login", userControllers.postLogin);
+userRouter.post("/signup", userControllers.postSignup);
 exports.default = userRouter;

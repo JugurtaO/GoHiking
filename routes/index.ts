@@ -3,7 +3,6 @@ import userRoutes from "./userRoutes/index";
 
 
 const Router=express.Router();
-
 Router.use("/users",userRoutes);
 
 

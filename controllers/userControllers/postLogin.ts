@@ -13,13 +13,15 @@ export  const postLogin=async (req: Request,res: Response)=>{
 
     if(!userInDB || userInDB.length!=1)
         return res.send("Oups something went wrong, try again!")
-    
-    console.log(userInDB instanceof myModels.User);
-    // console.log(userInDB.user_nickname);
-    // if(user_password!=userInDB.user_password)
-    //     return res.send("email or password incorrect , try again!")
+
     
 
-    res.send("OK.");
+
+    const dbUserPassword:String=userInDB[0].user_password;
+    if(user_password!=dbUserPassword)
+        return res.send("email or password incorrect , try again!")
+    
+
+    return res.send("OK.");
 
 }
