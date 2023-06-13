@@ -8,7 +8,7 @@ const express_1 = __importDefault(require("express"));
 const dotenv_1 = __importDefault(require("dotenv"));
 //creating express app
 const app = (0, express_1.default)();
-//dontenv configured and requiring db_handler just after
+//dontenv configured and requiring db_handler 
 dotenv_1.default.config();
 const config_1 = require("./database/config");
 // SETUP OUR EXPRESS APP SETTINGS 

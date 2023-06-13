@@ -41,7 +41,7 @@ const postLogin = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const userInDB = yield myModels.User.findAll({ where: { user_email: user_email }, attributes: ['user_password'] });
     if (!userInDB || userInDB.length != 1)
         return res.send("Oups something went wrong, try again!");
-    const dbUserPassword = userInDB[0].user_password;
+    const dbUserPassword = userInDB[0].dataValues.user_password;
     if (user_password != dbUserPassword)
         return res.send("email or password incorrect , try again!");
     return res.send("OK.");

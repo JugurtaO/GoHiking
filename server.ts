@@ -7,7 +7,7 @@ import dotenv from "dotenv";
 //creating express app
 const app= express();
 
-//dontenv configured and requiring db_handler just after
+//dontenv configured and requiring db_handler 
 dotenv.config();
 import {db_handler} from "./database/config";
 

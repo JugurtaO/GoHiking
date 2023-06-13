@@ -17,7 +17,8 @@ export  const postLogin=async (req: Request,res: Response)=>{
     
 
 
-    const dbUserPassword:String=userInDB[0].user_password;
+    const dbUserPassword:String=userInDB[0].dataValues.user_password;
+    
     if(user_password!=dbUserPassword)
         return res.send("email or password incorrect , try again!")
     
