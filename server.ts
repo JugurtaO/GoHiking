@@ -2,7 +2,7 @@
 import express from "express";
 import dotenv from "dotenv";
 //importing sessions
-import sessions from "express-session";
+import sessions from 'express-session';
 
 //requiring mosgoStore for storing our sessions in mongo Atlas DB
 import  mongostore from "connect-mongo";

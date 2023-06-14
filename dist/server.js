@@ -6,7 +6,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 //requiring some stuff for our app
 const express_1 = __importDefault(require("express"));
 const dotenv_1 = __importDefault(require("dotenv"));
-//creating express app
+//importing sessions
+const express_session_1 = __importDefault(require("express-session"));
+//requiring mosgoStore for storing our sessions in mongo Atlas DB
+const connect_mongo_1 = __importDefault(require("connect-mongo"));
+//creating express app 
 const app = (0, express_1.default)();
 //dontenv configured and requiring db_handler 
 dotenv_1.default.config();
@@ -20,6 +24,23 @@ config_1.db_handler.authenticate().then(() => {
 }).catch((error) => {
     console.error('Ouups, cannot get connection to MySQL server!' + error.message);
 });
+/** SETUP OUR SESSIONS */
+// console.log("mongo URL:",String(process.env.MONGO_ATLAS_SESSION_STORE_URL));
+const sessionOption = {
+    name: String(process.env.SESSION_NAME),
+    secret: String(process.env.SESSION_SECRET),
+    resave: false,
+    saveUninitialized: false,
+    store: connect_mongo_1.default.create({
+        mongoUrl: String(process.env.MONGO_ATLAS_SESSION_STORE_URL),
+        touchAfter: 5 * 24 * 60 * 60
+    }),
+    cookie: {
+        maxAge: 5 * 24 * 60 * 60 * 1000,
+        httpOnly: true,
+    }
+};
+app.use((0, express_session_1.default)(sessionOption));
 //use routes 
 const index_1 = __importDefault(require("./routes/index"));
 app.use(index_1.default);

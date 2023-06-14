@@ -40,6 +40,8 @@ const postSignup = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
     if (!user_nickname.length || !user_email.length || !user_password.length)
         return res.send("credentials can not be blank!");
     const newUser = yield myModels.User.create({ user_nickname: user_nickname, user_email: user_email, user_password: user_password });
+    // create session for the current user &send back a cookie 
+    req.session.active_user_email = user_email;
     return res.send("OK.");
 });
 exports.postSignup = postSignup;
