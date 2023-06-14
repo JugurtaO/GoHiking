@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 //requiring some stuff for our app
 const express_1 = __importDefault(require("express"));
 const dotenv_1 = __importDefault(require("dotenv"));
-//importing sessions
+//importing sessions & Declaring merging on express-session
 const express_session_1 = __importDefault(require("express-session"));
 //requiring mosgoStore for storing our sessions in mongo Atlas DB
 const connect_mongo_1 = __importDefault(require("connect-mongo"));
