@@ -1,11 +1,15 @@
 //requiring some stuff for our app
 import express from "express";
 import dotenv from "dotenv";
+//importing sessions
+import sessions from "express-session";
 
+//requiring mosgoStore for storing our sessions in mongo Atlas DB
+import  mongostore from "connect-mongo";
 
-
-//creating express app
+//creating express app 
 const app= express();
+
 
 //dontenv configured and requiring db_handler 
 dotenv.config();
@@ -25,6 +29,27 @@ db_handler.authenticate().then(() => {
 }).catch((error: Error) => {
     console.error('Ouups, cannot get connection to MySQL server!'+ error.message);
 });  
+
+
+/** SETUP OUR SESSIONS */
+// console.log("mongo URL:",String(process.env.MONGO_ATLAS_SESSION_STORE_URL));
+const sessionOption = {
+    name: String(process.env.SESSION_NAME),
+    secret: String(process.env.SESSION_SECRET),
+    resave: false,
+    saveUninitialized: false,
+    store:  mongostore.create({
+        mongoUrl:String(process.env.MONGO_ATLAS_SESSION_STORE_URL),
+        touchAfter:5 * 24 * 60 * 60
+    }),
+    cookie: {
+        maxAge: 5 * 24 * 60 * 60 * 1000, //  max_age = 5 days
+        httpOnly:true,
+    }
+};
+
+app.use(sessions(sessionOption));
+
 
 
 
