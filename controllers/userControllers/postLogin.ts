@@ -20,7 +20,6 @@ export  const postLogin=async (req: Request,res: Response)=>{
 // check if the typed password is equal to the hashed database password.
   const is_password_correct:boolean = bcrypt.compareSync(user_password, userInDB[0].dataValues.user_password);
 
-  console.log("Compared password is set to :",is_password_correct); // A SUPPRIMER APRÈS LE TEST
   if(!is_password_correct){
       return res.send("Email or Password incorrect, try again !");
      
