@@ -7,7 +7,7 @@ import sessions from 'express-session';
 declare module 'express-session' {
     export interface SessionData {
         active_user_nickname: { [key: string]: any };
-        active_user_email: { [key: string]: any };
+        active_user_email: { [key:string]: any };
         active_user_id: { [key: number]: any };
     }
 }
