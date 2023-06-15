@@ -12,9 +12,8 @@ export  const postSignup=async (req: Request,res: Response)=>{
 
     
     //generate a salt & hash the password
-    const salt = bcrypt.genSaltSync(12);
-    const hash = bcrypt.hashSync(String(user_password), salt);
-    
+    const salt :string= bcrypt.genSaltSync(12);
+    const hash :string= bcrypt.hashSync(user_password, salt);
 
 
     const newUser = await myModels.User.create({user_nickname:user_nickname,user_email:user_email,user_password:hash});
