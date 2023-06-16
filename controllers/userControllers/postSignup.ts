@@ -30,7 +30,8 @@ export  const postSignup=async (req: Request,res: Response)=>{
 
      // create session for the current user & send back a cookie 
     req.session.active_user_email=user_email;
-    console.log( req.session.active_user_email);
+    req.session.active_user_id=searchedUser[0].dataValues.user_id;
+    req.session.active_user_nickname=searchedUser[0].dataValues.user_nickname;
     
     
     return res.send("OK.");
