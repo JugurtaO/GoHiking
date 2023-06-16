@@ -28,11 +28,15 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const userControllers = __importStar(require("../../controllers/userControllers/index"));
+const trailControllers = __importStar(require("../../controllers/trailsControllers/index"));
 const userRouter = express_1.default.Router();
 userRouter.get("/login", userControllers.getLogin);
 userRouter.get("/signup", userControllers.getSignup);
 userRouter.get("/profile", userControllers.getProfile);
 userRouter.get("/signout", userControllers.getSignout);
+userRouter.get("/:user_id/trails", trailControllers.viewTrails);
+userRouter.post("/:user_id/trails/add", trailControllers.addTrail);
+userRouter.post("/:user_id/trails/:trail_id/delete", trailControllers.deleteTrail);
 userRouter.post("/login", userControllers.postLogin);
 userRouter.post("/signup", userControllers.postSignup);
 userRouter.post("/logout", userControllers.postLogout);

@@ -1,10 +1,8 @@
 BD: JOhikes -- application de randonneurs-- elle vous permet de: 
         - créer un profil utilisateur (SIGNUP / SIGNOUT/ LOGIN/ LOGOUT )
         - ajouter des parcours dans la map des parcours existants
-        - supprimer des parcours existants
-        - publier des posts sur vos journée de randonnées
-        - laisser des commentaires sur des posts publiés
-        - aimer des posts
+        - supprimer des parcours existants (qui vous appartiennent biensur)
+        - editer vos parcours.
 
 Classes:
 
@@ -14,9 +12,7 @@ Users(randonneur): en tant que randonneur ,j'ai un id, un nom, prénom , un emai
                   en tant que randonneur je peux commenter des postes
                   en tant que randonneur je peux liker  un post
                   
-         
-Posts: en tant que post j'ai un id,  un auteur, un titre, un contenu, nombre de likes, date de création et date de mise à jour 
-       
+                
 Trails: en tant que parcours j'ai un id, un nom, une localisation (nom de la ville), une durée, une longueur, un dénivelé, (un  niveau de difficulté qui dépend du dénivelé et de la durée)
 
 Difficulties: en tant que  difficulté j'ai un niveau , une longueur maximale, un denivelé maximale et une durée maximale

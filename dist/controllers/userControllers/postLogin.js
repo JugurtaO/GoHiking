@@ -50,6 +50,10 @@ const postLogin = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     if (!is_password_correct) {
         return res.send("Email or Password incorrect, try again !");
     }
+    // create session for the current user & send back a cookie 
+    req.session.active_user_email = user_email;
+    req.session.active_user_id = userInDB[0].dataValues.user_id;
+    req.session.active_user_nickname = userInDB[0].dataValues.user_nickname;
     return res.send("OK.");
 });
 exports.postLogin = postLogin;

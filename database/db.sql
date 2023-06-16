@@ -1,11 +1,9 @@
 CREATE DATABASE IF NOT EXISTS JOhikes;
 USE JOhikes;
 
-DROP TABLE Likes;
 DROP TABLE Hikes;
 DROP TABLE Trails;
 DROP TABLE Difficulties;
-DROP TABLE Posts;
 DROP TABLE Users;
 
 CREATE TABLE IF NOT EXISTS  Users (
@@ -17,19 +15,6 @@ CREATE TABLE IF NOT EXISTS  Users (
    updatedAt DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
 
   
-);
-
-CREATE TABLE IF NOT EXISTS Posts (
-   post_id INT PRIMARY KEY AUTO_INCREMENT,
-   post_title VARCHAR(1024) NOT NULL ,
-   post_body  TEXT NOT NULL,
-   createdAt DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-   updatedAt DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP, 
-   user_id INT NOT NULL,
-  
-   
-   CONSTRAINT POSTS_KEY FOREIGN KEY (user_id) REFERENCES Users(user_id)
-
 );
 
 
@@ -53,8 +38,9 @@ CREATE TABLE IF NOT EXISTS Trails (
    trail_name VARCHAR (128) NOT NULL ,
    trail_location VARCHAR (128) NOT NULL,
    difficulty_level VARCHAR (128) NOT NULL,
+   author_id INT NOT NULL,
 
-   
+   CONSTRAINT TrailKEY1 FOREIGN KEY (author_id) REFERENCES Users(user_id),
    CONSTRAINT Trails_key FOREIGN KEY (difficulty_level) REFERENCES Difficulties(difficulty_level)
  
 );
@@ -70,15 +56,6 @@ CREATE TABLE IF NOT EXISTS Hikes (
  
 );
 
-CREATE TABLE IF NOT EXISTS Likes (
-   user_id INT NOT NULL,
-   post_id INT NOT NULL,
-
-   CONSTRAINT HIKES_PKEY PRIMARY KEY (user_id,post_id),
-   CONSTRAINT HIKES_KEY1 FOREIGN KEY (user_id) REFERENCES Users(user_id),
-   CONSTRAINT HIKES_KEY2 FOREIGN KEY (post_id) REFERENCES Posts(post_id)
- 
-);
 
 
    

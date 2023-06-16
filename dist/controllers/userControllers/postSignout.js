@@ -51,17 +51,17 @@ const postSignout = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
     if (!safetoDelete)
         res.send("Email or Password incorrect, try again !");
     //now we can delelte safely all user activities before deleting it itself
-    //delete user likes ,delete user hikes and delete user posts concurrently as we don't need to await them ( each one doesn't depend in the other)
+    //delete user hikes and delete created user trails concurrently as we don't need to await them ( each one doesn't depend on the other)
     yield Promise.all([
-        myModels.Like.destroy({ where: { user_id: user_id } }),
         myModels.Hike.destroy({ where: { user_id: user_id } }),
-        myModels.Post.destroy({ where: { user_id: user_id } })
+        myModels.Trail.destroy({ where: { user_id: user_id } })
     ]);
     //delete now user
     yield myModels.User.destroy({ where: { user_email: user_email } });
     //set user session flags to null  <--> session killed
     req.session.active_user_email = null;
     req.session.active_user_id = null;
+    req.session.active_user_nickname = null;
     res.send("Successfuly signed  out.");
 });
 exports.postSignout = postSignout;

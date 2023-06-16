@@ -26,12 +26,11 @@ export const postSignout= async (req:Request,res:Response)=>{
 
     //now we can delelte safely all user activities before deleting it itself
     
-    //delete user likes ,delete user hikes and delete user posts concurrently as we don't need to await them ( each one doesn't depend in the other)
+    //delete user hikes and delete created user trails concurrently as we don't need to await them ( each one doesn't depend on the other)
 
     await Promise.all([
-        myModels.Like.destroy({where:{user_id:user_id}}),
         myModels.Hike.destroy({where:{user_id:user_id}}),
-        myModels.Post.destroy({where:{user_id:user_id}})
+        myModels.Trail.destroy({where:{user_id:user_id}})
 
     ]
     )
