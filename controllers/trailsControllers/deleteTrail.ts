@@ -4,6 +4,9 @@ import * as myModels from "../../models/index";
 export const deleteTrail= async (req:Request,res:Response)=>{
     
     const {trail_id}=req.params;
+
+    //delete hikes referencing corresponding trail before deleting it itself
+    await myModels.Hike.destroy({where:{trail_id:trail_id}});
     
     //no need to await the operation
     myModels.Trail.destroy({where:{trail_id:trail_id}});
