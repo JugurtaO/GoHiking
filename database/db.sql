@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS Difficulties (
 
 CREATE TABLE IF NOT EXISTS Trails (
    trail_id INT PRIMARY KEY AUTO_INCREMENT,
-   trail_name VARCHAR (128) NOT NULL ,
+   trail_name VARCHAR (128) UNIQUE  NOT NULL ,
    trail_location VARCHAR (128) NOT NULL,
    difficulty_level VARCHAR (128) NOT NULL,
    author_id INT NOT NULL,

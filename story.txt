@@ -1,8 +1,7 @@
 BD: JOhikes -- application de randonneurs-- elle vous permet de: 
-        - créer un profil utilisateur (SIGNUP / SIGNOUT/ LOGIN/ LOGOUT )
-        - ajouter des parcours dans la map des parcours existants
-        - supprimer des parcours existants (qui vous appartiennent biensur)
-        - editer vos parcours.
+        - créer un profil utilisateur.
+        - ajouter des parcours dans la map des parcours existants.
+        - supprimer des parcours existants (qui vous appartiennent biensur).
 
 Classes:
 
