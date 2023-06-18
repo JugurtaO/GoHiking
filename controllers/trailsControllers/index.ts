@@ -1,8 +1,9 @@
 import { addTrail } from "./addTrail";
 import { deleteTrail } from "./deleteTrail";
-import { viewTrails } from "./viewMyTrails";
-
+import { userTrails } from "./viewMyTrails";
+import { allTrails } from "./allTrails";
 
 export {addTrail};
 export {deleteTrail};
-export {viewTrails};
+export {userTrails};
+export  {allTrails};

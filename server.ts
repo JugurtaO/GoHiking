@@ -1,6 +1,19 @@
 //requiring some stuff for our app
 import express from "express";
 import dotenv from "dotenv";
+import path from "path";
+
+//creating express app 
+const app = express();
+
+
+
+// Set up middlewars 
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+app.set('view engine','ejs');
+app.set('views', path.join(__dirname,'../views'));
+app.use(express.static('public'));
 
 //importing sessions & Declaring merging on express-session
 import sessions from 'express-session';
@@ -15,8 +28,6 @@ declare module 'express-session' {
 //requiring mosgoStore for storing our sessions in mongo Atlas DB
 import mongostore from "connect-mongo";
 
-//creating express app 
-const app = express();
 
 
 //dontenv configured and requiring db_handler 

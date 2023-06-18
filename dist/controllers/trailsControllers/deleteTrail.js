@@ -36,6 +36,8 @@ exports.deleteTrail = void 0;
 const myModels = __importStar(require("../../models/index"));
 const deleteTrail = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { trail_id } = req.params;
+    //delete hikes referencing corresponding trail before deleting it itself
+    yield myModels.Hike.destroy({ where: { trail_id: trail_id } });
     //no need to await the operation
     myModels.Trail.destroy({ where: { trail_id: trail_id } });
     return res.send("OK.");

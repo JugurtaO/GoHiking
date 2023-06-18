@@ -6,12 +6,19 @@ Object.defineProperty(exports, "__esModule", { value: true });
 //requiring some stuff for our app
 const express_1 = __importDefault(require("express"));
 const dotenv_1 = __importDefault(require("dotenv"));
+const path_1 = __importDefault(require("path"));
+//creating express app 
+const app = (0, express_1.default)();
+// Set up middlewars 
+app.use(express_1.default.urlencoded({ extended: true }));
+app.use(express_1.default.json());
+app.set('view engine', 'ejs');
+app.set('views', path_1.default.join(__dirname, '../views'));
+app.use(express_1.default.static('public'));
 //importing sessions & Declaring merging on express-session
 const express_session_1 = __importDefault(require("express-session"));
 //requiring mosgoStore for storing our sessions in mongo Atlas DB
 const connect_mongo_1 = __importDefault(require("connect-mongo"));
-//creating express app 
-const app = (0, express_1.default)();
 //dontenv configured and requiring db_handler 
 dotenv_1.default.config();
 const config_1 = require("./database/config");
