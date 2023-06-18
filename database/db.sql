@@ -38,6 +38,7 @@ CREATE TABLE IF NOT EXISTS Trails (
    trail_name VARCHAR (128) UNIQUE  NOT NULL ,
    trail_location VARCHAR (128) NOT NULL,
    difficulty_level VARCHAR (128) NOT NULL,
+   trail_image VARCHAR (1024) NOT NULL,
    author_id INT NOT NULL,
 
    CONSTRAINT TrailKEY1 FOREIGN KEY (author_id) REFERENCES Users(user_id),

@@ -11,8 +11,7 @@ export const allTrails= async (req:Request,res:Response)=>{
         return res.send("No trail was found, login and let's create one.")
 
 
-
-    return res.json(allTrails);
+    return res.render("trails",{allTrails});
 
 
 

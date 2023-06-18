@@ -39,6 +39,6 @@ const allTrails = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const allTrails = yield myModels.Trail.findAll();
     if (!allTrails.length)
         return res.send("No trail was found, login and let's create one.");
-    return res.json(allTrails);
+    return res.render("trails", { allTrails });
 });
 exports.allTrails = allTrails;

@@ -35,9 +35,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.addTrail = void 0;
 const myModels = __importStar(require("../../models/index"));
 const addTrail = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { trail_name, trail_location, difficulty_level } = req.body;
+    const { trail_name, trail_location, difficulty_level, trail_image } = req.body;
     const author_id = req.params.user_id;
-    if (!trail_name.length || !trail_location.length || !difficulty_level.length)
+    if (!trail_name.length || !trail_location.length || !difficulty_level.length || !trail_image.length)
         return res.send("Trail characteristics cannot be blank!!");
     //check wether the wanted trail doesn't not already exist -- if not create new trail 
     const existedTrails = yield myModels.Trail.findAll({ where: { trail_name: trail_name } });
@@ -45,7 +45,7 @@ const addTrail = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         return res.send("Trail with given name already exists! ");
     // now we can create new trail 
     //no need to await the operation the user cannot see the effect behind the scenes
-    const newTrail = myModels.Trail.create({ trail_name: trail_name, trail_location: trail_location, difficulty_level: difficulty_level, author_id: author_id });
+    const newTrail = myModels.Trail.create({ trail_name: trail_name, trail_location: trail_location, difficulty_level: difficulty_level, trail_image: trail_image, author_id: author_id });
     return res.send("OK.");
 });
 exports.addTrail = addTrail;

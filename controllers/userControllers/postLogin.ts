@@ -7,6 +7,9 @@ import bcrypt from "bcryptjs";
 
 export  const postLogin=async (req: Request,res: Response)=>{
 
+    if (req.session.active_user_email)
+        return res.send("Already logged in .")
+
     const {user_email,user_password}:{user_email:String,user_password:string } = req.body;
     if(!user_email.length ||!user_password.length)
         return res.send("credentials can not be blank!")

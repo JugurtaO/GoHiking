@@ -80,6 +80,10 @@ export const Trail = db_handler.define("Trail", {
         type: DataTypes.STRING(128),
         allowNull: false
     },
+    trail_image:{
+        type: DataTypes.STRING(1024),
+        allowNull: false
+    },
     author_id: {
         type: DataTypes.INTEGER,
         allowNull:false

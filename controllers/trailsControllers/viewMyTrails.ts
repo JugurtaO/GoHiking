@@ -5,7 +5,7 @@ export const userTrails= async (req:Request,res:Response)=>{
     
     const {user_id}=req.params;
     
-    //no need to await the operation
+  
     const allTrails=await myModels.Trail.findAll({where:{author_id:user_id}});
 
     if (!allTrails.length)

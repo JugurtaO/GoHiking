@@ -32,13 +32,13 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.userTrails = void 0;
+exports.viewTrail = void 0;
 const myModels = __importStar(require("../../models/index"));
-const userTrails = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { user_id } = req.params;
-    const allTrails = yield myModels.Trail.findAll({ where: { author_id: user_id } });
-    if (!allTrails.length)
+const viewTrail = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { trail_id } = req.params;
+    const trail = yield myModels.Trail.findOne({ where: { trail_id: trail_id } });
+    if (trail === null)
         return res.send("No trail was found, login and let's create one.");
-    return res.json(allTrails);
+    return res.json(trail);
 });
-exports.userTrails = userTrails;
+exports.viewTrail = viewTrail;

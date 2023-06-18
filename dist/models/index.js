@@ -67,6 +67,10 @@ exports.Trail = config_1.db_handler.define("Trail", {
         type: sequelize_1.DataTypes.STRING(128),
         allowNull: false
     },
+    trail_image: {
+        type: sequelize_1.DataTypes.STRING(1024),
+        allowNull: false
+    },
     author_id: {
         type: sequelize_1.DataTypes.INTEGER,
         allowNull: false

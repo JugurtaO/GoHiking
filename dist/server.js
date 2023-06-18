@@ -14,7 +14,7 @@ app.use(express_1.default.urlencoded({ extended: true }));
 app.use(express_1.default.json());
 app.set('view engine', 'ejs');
 app.set('views', path_1.default.join(__dirname, '../views'));
-app.use(express_1.default.static('public'));
+app.use(express_1.default.static('../public'));
 //importing sessions & Declaring merging on express-session
 const express_session_1 = __importDefault(require("express-session"));
 //requiring mosgoStore for storing our sessions in mongo Atlas DB

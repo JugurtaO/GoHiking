@@ -11,6 +11,7 @@ userRouter.get("/signup",userControllers.getSignup);
 userRouter.get("/profile",userControllers.getProfile);
 userRouter.get("/signout",userControllers.getSignout);
 userRouter.get("/:user_id/trails",trailControllers.userTrails);
+userRouter.get("/:user_id/trails/:trail_id",trailControllers.viewTrail);
 
 userRouter.post("/:user_id/trails/add",trailControllers.addTrail);
 userRouter.post("/:user_id/trails/:trail_id/delete",trailControllers.deleteTrail);

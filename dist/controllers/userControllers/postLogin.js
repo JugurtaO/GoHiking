@@ -39,6 +39,8 @@ exports.postLogin = void 0;
 const myModels = __importStar(require("../../models/index"));
 const bcryptjs_1 = __importDefault(require("bcryptjs"));
 const postLogin = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    if (req.session.active_user_email)
+        return res.send("Already logged in .");
     const { user_email, user_password } = req.body;
     if (!user_email.length || !user_password.length)
         return res.send("credentials can not be blank!");
