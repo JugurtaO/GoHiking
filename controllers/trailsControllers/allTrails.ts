@@ -1,17 +1,27 @@
-import { Request,Response } from "express";
+import { Request, Response } from "express";
 import * as myModels from "../../models/index";
 
-export const allTrails= async (req:Request,res:Response)=>{
-    
-    
+export const allTrails = (req: Request, res: Response) => {
+
+
     //no need to await the operation
-    const allTrails=await myModels.Trail.findAll();
+    const Trails = myModels.Trail.findAll();
 
-    if (!allTrails.length)
-        return res.send("No trail was found, login and let's create one.")
+    Trails.then(allTrails => {
+
+        if (!allTrails.length)
+            return res.send("No trail was found, login and let's create one.")
 
 
-    return res.render("trails",{allTrails});
+        return res.render("trails", { allTrails });
+
+    }).catch(err => {
+        return res.send("error payload set to"+ err);
+    })
+
+
+
+
 
 
 

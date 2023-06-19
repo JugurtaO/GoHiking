@@ -39,7 +39,10 @@ const deleteTrail = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
     //delete hikes referencing corresponding trail before deleting it itself
     yield myModels.Hike.destroy({ where: { trail_id: trail_id } });
     //no need to await the operation
-    myModels.Trail.destroy({ where: { trail_id: trail_id } });
-    return res.send("OK.");
+    myModels.Trail.destroy({ where: { trail_id: trail_id } }).then(data => {
+        return res.send("OK.");
+    }).catch(err => {
+        return res.send("error payload set to" + err);
+    });
 });
 exports.deleteTrail = deleteTrail;

@@ -26,6 +26,6 @@ export const addTrail= async (req:Request,res:Response)=>{
 
     return res.send("OK.")
 
-
+    
 
 };

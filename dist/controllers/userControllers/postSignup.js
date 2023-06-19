@@ -43,18 +43,22 @@ const postSignup = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
     const { user_nickname, user_email, user_password } = req.body;
     if (!user_nickname.length || !user_email.length || !user_password.length)
         return res.send("credentials can not be blank!");
+    //checking wether user already exists
+    const searchedUser = yield myModels.User.findAll({ where: { user_email: user_email } });
+    if (searchedUser && searchedUser.length == 1)
+        return res.send("Something went wrong. Please log in to proceed !.");
     //generate a salt & hash the password
     const salt = bcryptjs_1.default.genSaltSync(12);
     const hash = bcryptjs_1.default.hashSync(user_password, salt);
-    const newUser = yield myModels.User.create({ user_nickname: user_nickname, user_email: user_email, user_password: hash });
-    //checking wether the user has been successfully created
-    const searchedUser = yield myModels.User.findAll({ where: { user_email: user_email } });
-    if (!searchedUser || searchedUser.length != 1)
-        return res.send("Something went wrong. Please log in to proceed !.");
-    // create session for the current user & send back a cookie 
-    req.session.active_user_email = user_email;
-    req.session.active_user_id = searchedUser[0].dataValues.user_id;
-    req.session.active_user_nickname = searchedUser[0].dataValues.user_nickname;
-    return res.send("OK.");
+    const newUser = myModels.User.create({ user_nickname: user_nickname, user_email: user_email, user_password: hash });
+    newUser.then(data => {
+        // create session for the current user & send back a cookie 
+        req.session.active_user_email = user_email;
+        req.session.active_user_id = searchedUser[0].dataValues.user_id;
+        req.session.active_user_nickname = searchedUser[0].dataValues.user_nickname;
+        return res.send("OK.");
+    }).catch(err => {
+        return res.send("error payload set to" + err);
+    });
 });
 exports.postSignup = postSignup;

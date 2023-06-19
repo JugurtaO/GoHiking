@@ -48,7 +48,7 @@ export const postSignout= async (req:Request,res:Response)=>{
 
     })
     .catch(err=>{
-        console.log("Oups somthing went wrong, you are not signed out !")
+        return res.send("error payload set to"+ err);
     })
 
 

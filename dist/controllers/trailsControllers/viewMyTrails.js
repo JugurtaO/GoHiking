@@ -22,23 +22,18 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.userTrails = void 0;
 const myModels = __importStar(require("../../models/index"));
-const userTrails = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const userTrails = (req, res) => {
     const { user_id } = req.params;
-    const allTrails = yield myModels.Trail.findAll({ where: { author_id: user_id } });
-    if (!allTrails.length)
-        return res.send("No trail was found, login and let's create one.");
-    return res.json(allTrails);
-});
+    const Trails = myModels.Trail.findAll({ where: { author_id: user_id } });
+    Trails.then(allTrails => {
+        if (!allTrails.length)
+            return res.send("No trail was found, login and let's create one.");
+        return res.json(allTrails);
+    }).catch(err => {
+        return res.send("error payload set to" + err);
+    });
+};
 exports.userTrails = userTrails;
