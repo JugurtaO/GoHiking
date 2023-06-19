@@ -28,24 +28,28 @@ export const postSignout= async (req:Request,res:Response)=>{
     
     //delete user hikes and delete created user trails concurrently as we don't need to await them ( each one doesn't depend on the other)
 
-    await Promise.all([
+    Promise.all([
         myModels.Hike.destroy({where:{user_id:user_id}}),
         myModels.Trail.destroy({where:{user_id:user_id}})
 
     ]
-    )
+    ).then(data=>{
+        //now delete user
+        myModels.User.destroy({where:{user_email:user_email}});
+
+
+        //set user session flags to null  <--> session killed
+        req.session.active_user_email = null;
+        req.session.active_user_id = null;
+        req.session.active_user_nickname=null;
     
+    
+        res.send("Successfuly signed  out.")
 
-    //delete now user
-    await myModels.User.destroy({where:{user_email:user_email}})
+    })
+    .catch(err=>{
+        console.log("Oups somthing went wrong, you are not signed out !")
+    })
 
-
-    //set user session flags to null  <--> session killed
-    req.session.active_user_email = null;
-    req.session.active_user_id = null;
-    req.session.active_user_nickname=null;
-
-
-    res.send("Successfuly signed  out.")
 
 };
