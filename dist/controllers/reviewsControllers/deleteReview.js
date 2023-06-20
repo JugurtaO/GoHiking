@@ -31,31 +31,21 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.postLogin = void 0;
+exports.deleteReview = void 0;
 const myModels = __importStar(require("../../models/index"));
-const bcryptjs_1 = __importDefault(require("bcryptjs"));
-const postLogin = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    if (req.session.active_user_email)
-        return res.send("Already logged in .");
-    const { user_email, user_password } = req.body;
-    if (!user_email.length || !user_password.length)
-        return res.send("credentials can not be blank!");
-    const userInDB = yield myModels.User.findAll({ where: { user_email: user_email }, attributes: ['user_password', 'user_id', 'user_nickname'] });
-    if (!userInDB || userInDB.length != 1)
-        return res.send("Email or Password incorrect, try again!");
-    // check if the typed password is equal to the hashed database password.
-    const is_password_correct = bcryptjs_1.default.compareSync(user_password, userInDB[0].dataValues.user_password);
-    if (!is_password_correct) {
-        return res.send("Email or Password incorrect, try again !");
-    }
-    // create session for the current user & send back a cookie 
-    req.session.active_user_email = user_email;
-    req.session.active_user_id = userInDB[0].dataValues.user_id;
-    req.session.active_user_nickname = userInDB[0].dataValues.user_nickname;
-    return res.send("OK.");
+const deleteReview = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { review_id } = req.params;
+    const allReviews = yield myModels.Review.findAll({ where: { review_id: review_id } });
+    if (!allReviews.length || allReviews.length != 1)
+        return res.send("no review found with given data");
+    if (allReviews[0].dataValues.author_id != req.session.active_user_id)
+        return res.status(401).send("not authorized to delete review !");
+    const review = myModels.Review.destroy({ where: { review_id: review_id } })
+        .then(data => {
+        return res.send("OK.");
+    }).catch(err => {
+        return res.send("error set to" + err);
+    });
 });
-exports.postLogin = postLogin;
+exports.deleteReview = deleteReview;

@@ -5,8 +5,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const index_1 = __importDefault(require("./userRoutes/index"));
-const otherRoutes_1 = __importDefault(require("./otherRoutes"));
+const index_2 = __importDefault(require("./otherRoutes/index"));
+const index_3 = __importDefault(require("./reviewsRoutes/index"));
 const Router = express_1.default.Router();
-Router.use("/", otherRoutes_1.default);
-Router.use("/users", index_1.default);
+Router.use("/", index_2.default);
+Router.use("/users", index_1.default); //trailRoutes are included in user's ones
+Router.use('/trails', index_3.default);
 exports.default = Router;

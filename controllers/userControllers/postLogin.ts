@@ -14,7 +14,7 @@ export const postLogin = async (req: Request, res: Response) => {
     if (!user_email.length || !user_password.length)
         return res.send("credentials can not be blank!")
 
-    const userInDB = await myModels.User.findAll({ where: { user_email: user_email }, attributes: ['user_password'] });
+    const userInDB = await myModels.User.findAll({ where: { user_email: user_email }, attributes: ['user_password','user_id','user_nickname'] });
 
     if (!userInDB || userInDB.length != 1)
         return res.send("Email or Password incorrect, try again!")
