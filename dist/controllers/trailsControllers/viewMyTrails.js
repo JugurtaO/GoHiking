@@ -26,7 +26,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.userTrails = void 0;
 const myModels = __importStar(require("../../models/index"));
 const userTrails = (req, res) => {
-    const { user_id } = req.params;
+    const user_id = req.session.active_user_id;
     const Trails = myModels.Trail.findAll({ where: { author_id: user_id } });
     Trails.then(allTrails => {
         if (!allTrails.length)

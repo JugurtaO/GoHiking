@@ -3,7 +3,7 @@ import * as myModels from "../../models/index";
 
 export const userTrails = (req: Request, res: Response) => {
 
-    const { user_id } = req.params;
+    const  user_id  = req.session.active_user_id;
 
 
     const Trails = myModels.Trail.findAll({ where: { author_id: user_id } });

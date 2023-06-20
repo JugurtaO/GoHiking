@@ -4,7 +4,7 @@ import * as myModels from "../../models/index";
 export const addTrail= async (req:Request,res:Response)=>{
 
     const {trail_name ,trail_location ,difficulty_level,trail_image}:{trail_name:String ,trail_location:String ,difficulty_level:String,trail_image:String}= req.body;
-    const author_id=req.params.user_id;
+    const author_id=req.session.active_user_id;
 
 
 
