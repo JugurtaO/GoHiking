@@ -22,9 +22,13 @@ export const addTrail= async (req:Request,res:Response)=>{
     
     // now we can create new trail 
     //no need to await the operation the user cannot see the effect behind the scenes
-    const newTrail= myModels.Trail.create({trail_name:trail_name ,trail_location:trail_location ,difficulty_level:difficulty_level,trail_image:trail_image,author_id:author_id});
-
-    return res.send("OK.")
+    const newTrail= myModels.Trail.create({trail_name:trail_name ,trail_location:trail_location ,difficulty_level:difficulty_level,trail_image:trail_image,author_id:author_id})
+    .then(data=>{
+        return res.send("OK.");
+    }).catch(err=>{
+        res.send("error set to"+err);
+    });
+  
 
     
 

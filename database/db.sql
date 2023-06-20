@@ -47,6 +47,21 @@ CREATE TABLE IF NOT EXISTS Trails (
 );
 
 
+CREATE TABLE IF NOT EXISTS Reviews(
+    review_id INT PRIMARY KEY AUTO_INCREMENT,
+    review_text VARCHAR(256) NOT NULL,
+
+    createdAt DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updatedAt DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+ 
+
+    author_id INT NOT NULL,
+    trail_id INT NOT NULL,
+
+    FOREIGN KEY (author_id) REFERENCES Users(user_id),
+    FOREIGN KEY (trail_id) REFERENCES Trails(trail_id)
+);
+
 CREATE TABLE IF NOT EXISTS Hikes (
    user_id INT NOT NULL,
    trail_id INT NOT NULL,

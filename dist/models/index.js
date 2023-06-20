@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Hike = exports.Trail = exports.Difficulty = exports.User = void 0;
+exports.Hike = exports.Review = exports.Trail = exports.Difficulty = exports.User = void 0;
 const sequelize_1 = require("sequelize");
 const config_1 = require("../database/config");
 //Creating an instance of User from Users entity
@@ -78,6 +78,29 @@ exports.Trail = config_1.db_handler.define("Trail", {
 }, {
     tableName: "Trails",
     timestamps: false
+});
+//Creating an instance of review from Reviews entity
+exports.Review = config_1.db_handler.define("Review", {
+    review_id: {
+        autoIncrement: true,
+        type: sequelize_1.DataTypes.INTEGER,
+        primaryKey: true
+    },
+    review_text: {
+        type: sequelize_1.DataTypes.STRING(256),
+        allowNull: false
+    },
+    author_id: {
+        type: sequelize_1.DataTypes.INTEGER,
+        allowNull: false
+    },
+    trail_id: {
+        type: sequelize_1.DataTypes.INTEGER,
+        allowNull: false
+    },
+}, {
+    tableName: "Reviews",
+    timestamps: true
 });
 //Creating an instance of Hike from Hikes entity
 exports.Hike = config_1.db_handler.define("Hike", {

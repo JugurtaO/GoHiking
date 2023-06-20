@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import * as myModels from "../../models/index";
 import bcrypt from "bcryptjs";
+import { type } from "os";
 
 
 export const postSignup = async (req: Request, res: Response) => {
@@ -31,8 +32,8 @@ export const postSignup = async (req: Request, res: Response) => {
     newUser.then(data => {
         // create session for the current user & send back a cookie 
         req.session.active_user_email = user_email;
-        req.session.active_user_id = searchedUser[0].dataValues.user_id;
-        req.session.active_user_nickname = searchedUser[0].dataValues.user_nickname;
+        req.session.active_user_id = data.dataValues.user_id;
+        req.session.active_user_nickname = data.dataValues.user_nickname;
 
 
         return res.send("OK.");

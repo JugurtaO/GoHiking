@@ -54,8 +54,8 @@ const postSignup = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
     newUser.then(data => {
         // create session for the current user & send back a cookie 
         req.session.active_user_email = user_email;
-        req.session.active_user_id = searchedUser[0].dataValues.user_id;
-        req.session.active_user_nickname = searchedUser[0].dataValues.user_nickname;
+        req.session.active_user_id = data.dataValues.user_id;
+        req.session.active_user_nickname = data.dataValues.user_nickname;
         return res.send("OK.");
     }).catch(err => {
         return res.send("error payload set to" + err);

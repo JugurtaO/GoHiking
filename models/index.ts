@@ -94,6 +94,32 @@ export const Trail = db_handler.define("Trail", {
         timestamps: false
     });
 
+
+
+    //Creating an instance of review from Reviews entity
+    export const Review = db_handler.define("Review", {
+        review_id: {
+            autoIncrement: true,
+            type: DataTypes.INTEGER,
+            primaryKey: true
+        },
+        review_text: {
+            type: DataTypes.STRING(256),
+            allowNull: false
+        },
+        author_id: {
+            type: DataTypes.INTEGER,
+            allowNull: false
+        },
+        trail_id: {
+            type: DataTypes.INTEGER,
+            allowNull:false
+        },
+    },
+        {
+            tableName: "Reviews",
+            timestamps: true
+        });
 //Creating an instance of Hike from Hikes entity
 export const Hike = db_handler.define("Hike", {
 
