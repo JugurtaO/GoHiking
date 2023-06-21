@@ -28,10 +28,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const otherControllers = __importStar(require("../../controllers/otherControllers/index"));
-const trailControllers = __importStar(require("../../controllers/trailsControllers/index"));
 const otherRouter = express_1.default.Router();
 otherRouter.get("/", otherControllers.home);
 otherRouter.get("/home", otherControllers.home);
 otherRouter.get("/about", otherControllers.about);
-otherRouter.get("/trails", trailControllers.allTrails);
 exports.default = otherRouter;

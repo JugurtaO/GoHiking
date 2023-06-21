@@ -1,5 +1,4 @@
 import express from "express";
-import * as userControllers from "../../controllers/userControllers/index";
 import * as trailControllers from "../../controllers/trailsControllers/index";
 
 

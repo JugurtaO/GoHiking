@@ -7,8 +7,10 @@ const express_1 = __importDefault(require("express"));
 const index_1 = __importDefault(require("./userRoutes/index"));
 const index_2 = __importDefault(require("./otherRoutes/index"));
 const index_3 = __importDefault(require("./reviewsRoutes/index"));
+const index_4 = __importDefault(require("./trailsRoutes/index"));
 const Router = express_1.default.Router();
 Router.use("/", index_2.default);
-Router.use("/users", index_1.default); //trailRoutes are included in user's ones
-Router.use('/trails', index_3.default);
+Router.use("/users", index_1.default);
+Router.use("/trails", index_4.default);
+Router.use("/trails/:trail_id/reviews", index_3.default);
 exports.default = Router;

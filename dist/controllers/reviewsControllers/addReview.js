@@ -28,8 +28,9 @@ const myModels = __importStar(require("../../models/index"));
 const addReview = (req, res) => {
     const { review_text } = req.body;
     const author_id = req.session.active_user_id;
-    console.log("author_id>>>>", req.session.active_user_id);
     const { trail_id } = req.params;
+    console.log(" params >>>", req.params);
+    console.log("trail_id>>>>", trail_id);
     if (!review_text.length)
         return res.send("Review cannot be blank, leave something !");
     //no need to await the operation the user cannot see the effect behind the scenes

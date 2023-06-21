@@ -27,6 +27,8 @@ exports.allReviews = void 0;
 const myModels = __importStar(require("../../models/index"));
 const allReviews = (req, res) => {
     const { trail_id } = req.params;
+    console.log(req.params);
+    console.log("trail_id >>>", trail_id);
     //no need to await the operation
     const Reviews = myModels.Review.findAll({ where: { trail_id: trail_id } });
     Reviews.then(allReviews => {

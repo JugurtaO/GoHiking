@@ -10,8 +10,8 @@ const Router=express.Router();
 
 Router.use("/",otherRoutes);
 Router.use("/users",userRoutes);   
-Router.use('/trails',trailRoutes);
-Router.use("/trails/:trail_id")
+Router.use("/trails",trailRoutes);
+Router.use("/trails/:trail_id/reviews",reviewRoutes);
 
 
 

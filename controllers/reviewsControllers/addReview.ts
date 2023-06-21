@@ -5,8 +5,9 @@ export const addReview= (req:Request,res:Response)=>{
 
     const {review_text}:{review_text:String}= req.body;
     const author_id=req.session.active_user_id;
-    console.log("author_id>>>>",req.session.active_user_id);
     const {trail_id}=req.params;
+    console.log(" params >>>",req.params);
+    console.log("trail_id>>>>",trail_id);
    
 
 
@@ -21,7 +22,7 @@ export const addReview= (req:Request,res:Response)=>{
     newReview.then(data=>{
         return res.send("OK.");
     }).catch(err=>{
-        return res.send("error set to "+err);
+        return res.send("error set to "+ err);
     });
   
 
