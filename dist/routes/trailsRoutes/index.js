@@ -31,8 +31,9 @@ const trailControllers = __importStar(require("../../controllers/trailsControlle
 const reviewControllers = __importStar(require("../../controllers/reviewsControllers/index"));
 const trailRouter = express_1.default.Router();
 trailRouter.get("/", trailControllers.allTrails);
+trailRouter.get("/new", trailControllers.renderCreateTrail);
 trailRouter.get("/:trail_id", trailControllers.viewTrail);
-trailRouter.get("/:trail_id/reviews/", reviewControllers.allReviews);
+trailRouter.get("/:trail_id/reviews", reviewControllers.allReviews);
 trailRouter.post("/add", trailControllers.addTrail);
 trailRouter.post("/:trail_id/delete", trailControllers.deleteTrail);
 trailRouter.post("/:trail_id/reviews/add", reviewControllers.addReview);

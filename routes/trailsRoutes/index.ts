@@ -7,8 +7,9 @@ const trailRouter=express.Router();
 
 
 trailRouter.get("/",trailControllers.allTrails);
+trailRouter.get("/new",trailControllers.renderCreateTrail);
 trailRouter.get("/:trail_id",trailControllers.viewTrail);
-trailRouter.get("/:trail_id/reviews/",reviewControllers.allReviews);
+trailRouter.get("/:trail_id/reviews",reviewControllers.allReviews);
 
 trailRouter.post("/add",trailControllers.addTrail);
 trailRouter.post("/:trail_id/delete",trailControllers.deleteTrail);

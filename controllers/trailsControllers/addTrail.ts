@@ -25,6 +25,7 @@ export const addTrail= async (req:Request,res:Response)=>{
     const newTrail= myModels.Trail.create({trail_name:trail_name ,trail_location:trail_location ,difficulty_level:difficulty_level,trail_image:trail_image,author_id:author_id})
     .then(data=>{
         return res.send("OK.");
+       
     }).catch(err=>{
         res.send("error set to"+err);
     });
