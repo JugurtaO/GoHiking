@@ -29,7 +29,7 @@ const addReview = (req, res) => {
     const { review_text } = req.body;
     const author_id = req.session.active_user_id;
     const { trail_id } = req.params;
-    console.log(" params >>>", req.params);
+    console.log(" params >>>", req.path);
     console.log("trail_id>>>>", trail_id);
     if (!review_text.length)
         return res.send("Review cannot be blank, leave something !");

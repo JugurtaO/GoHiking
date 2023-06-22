@@ -6,7 +6,9 @@ export const addReview= (req:Request,res:Response)=>{
     const {review_text}:{review_text:String}= req.body;
     const author_id=req.session.active_user_id;
     const {trail_id}=req.params;
-    console.log(" params >>>",req.params);
+
+
+    console.log(" params >>>",req.path);
     console.log("trail_id>>>>",trail_id);
    
 
