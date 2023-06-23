@@ -7,7 +7,7 @@ export const addTrail= async (req:Request,res:Response)=>{
     const author_id=req.session.active_user_id;
 
 
-
+    console.log(">>>>>>>>>>>> ", trail_name,trail_location, trail_image);
 
     if (!trail_name.length || !trail_location.length || !difficulty_level.length || !trail_image.length)
         return res.send("Trail characteristics cannot be blank!!")

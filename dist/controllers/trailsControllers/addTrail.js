@@ -37,6 +37,7 @@ const myModels = __importStar(require("../../models/index"));
 const addTrail = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { trail_name, trail_location, difficulty_level, trail_image } = req.body;
     const author_id = req.session.active_user_id;
+    console.log(">>>>>>>>>>>> ", trail_name, trail_location, trail_image);
     if (!trail_name.length || !trail_location.length || !difficulty_level.length || !trail_image.length)
         return res.send("Trail characteristics cannot be blank!!");
     //check wether the wanted trail doesn't not already exist -- if not create new trail 
