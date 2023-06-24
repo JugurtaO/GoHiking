@@ -1,87 +1,67 @@
-<!DOCTYPE html >
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <title> new trail </title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="stylesheet" href="/style.css">
-    <meta name=”viewport” content=”width=device-width, initial-scale=1.0">
-    
+  <meta charset="UTF-8">
+  <title> new trail </title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <link rel="stylesheet" href="/style.css">
+  <meta name=”viewport” content=”width=device-width, initial-scale=1.0">
+
 
 </head>
+
 <body>
-   
 
 
 
 
 
-    <%- include('./partials/navbar') %>
+  <%- include('./partials/navbar') %>
 
-    <div class="row mx-0 justify-content-center form-main">
-        <div class="col-9 col-md-6">
-            <div class="main-form-sec">
-                <ul class="pl-0">
-                    <H4>Create your trail !</H4>
-                </ul>
-                <form action="/trails/add" method="post" class="needs-validation" novalidate enctype="multipart/form-data">
-                    <label for="name">Trail name :</label>
-                    <div class="input-group mb-3">
-                        <input required name="trail_name" id="name" type="text" class="form-control"
-                            placeholder="name" aria-label="name" aria-describedby="basic-addon1"
-                            autofocus>
-                        <div class="valid-feedback">Looks Good!</div>
-                        <div class="invalid-feedback">Please enter a valid name</div>
-                    </div>
+  <div class="row">
+    <h1 class="text-center">Create your trail !</h1>
 
-                    <label for="location">Trail location :</label>
-                    <div class="input-group mb-3">
-                        <input required name="trail_location" id="location" type="text"
-                            class="form-control" placeholder="location" aria-label="location"
-                            aria-describedby="basic-addon1">
-                        <div class="valid-feedback">Looks Good!</div>
-                        <div class="invalid-feedback">Please enter a valid location</div>
-                    </div>
-                    <label for="level">Difficulty level :</label>
-                    <div class="input-group mb-3">
-                        <input required name="difficulty_level" id="level" type="text"
-                            class="form-control" placeholder="difficulty level" aria-label="difficulty level"
-                            aria-describedby="basic-addon1">
-                        <div class="valid-feedback">Looks Good!</div>
-                        <div class="invalid-feedback">Please enter a valid difficulty level </div>
-                    </div>
-
-                    <label for="image">Trail image :</label>
-                    <div class="input-group mb-3">
-                        <input required name="trail_image" id="image" type="file"
-                            class="form-control " placeholder="image adress (url) " aria-label="trail image "
-                            aria-describedby="basic-addon1">
-                        <div class="valid-feedback ">Looks Good!</div>
-                        <div class="invalid-feedback ">Please enter a valid image adress</div>
-                    </div>
-
-
-                    
-
-
-                    <button class="btn btn-outline-success my-3 ">Post</button>
-                    <a class="btn btn-outline-info " href="/trails ">All Trails</a>
-
-                </form>
+    <div class="col-6  offset-3">
+        <form action="/trails/add" method="POST">
+            <div class="mb-3">
+              <label for="name" class="form-label">Name :</label>
+              <input required name="trail_name" id="name" type="text" class="form-control" placeholder="name" autofocus>
             </div>
-        </div>
+  
+            <div class="mb-3">
+                <label for="location" class="form-label">Location :</label>
+                <input required name="trail_location" id="location" type="text" class="form-control" placeholder="location" autofocus>
+              </div>
+            <div class="mb-3">
+              <label for="level">Difficulty level :</label>
+              <input required name="difficulty_level" id="level" type="text" class="form-control" placeholder="level">
+            </div>
+  
+            <div class="mb-3">
+              <label for="image">Image Url :</label>
+              <input required name="trail_image" id="image" type="file" class="form-control " placeholder="image adress (url) ">
+            </div>
+  
+  
+  
+  
+  
+            <button class="btn btn-success ">Post</button>
+            <a class="btn btn-outline-info " href="/trails ">All Trails</a>
+  
+          </form>
 
     </div>
 
 
-   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+  </div>
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
 </body>
 
 </html>
-
-
-
-
-
