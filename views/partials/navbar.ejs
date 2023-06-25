@@ -1,17 +1,97 @@
-<nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#">JO-Hikes</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+  <nav class="navbar navbar-expand-lg navbar-dark sticky-top bg-dark mb-5">
+    <div class="container-fluid navbar__container">
+        <a class="navbar-brand" href="/"><i class="fas fa-map-signs"></i> JO-Hikes</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div class="navbar-nav">
-          <a class="nav-link active" aria-current="page" href="/">Home</a>
-          <a class="nav-link" href="/trails">Trails</a>
-          <a class="nav-link" href="/trails/new">New trail</a>
+        <div class="collapse navbar-collapse" id="navbarScroll">
+            <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Tools
+                    </a>
 
-          <a class="nav-link" href="/about">About us</a>
+                    <ul class="navbar__dropdown dropdown-menu" style="color:white !important; background:#212529 !important;" aria-labelledby="navbarScrollingDropdown">
+                        <li class="nav-item">
+                            <a class="nav-link " aria-current="page" href="/campgrounds"><i class="fas fa-campground"></i> Our Trails</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/trails/add"><i class="fas fa-map-marked-alt"></i> Add trail</a>
+
+                        </li>
+                        <% if(!active_user_email){ %>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/users/login"><i class="fas fa-user-check"></i> Login</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/users/signup"><i class="fas fa-user-plus"></i> Signup</a>
+                            </li>
+                            <% }else{ %>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/users/logout"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/users/signout"><i class="fas fa-user-minus"></i> Signout</a>
+                                </li>
+                                <% } %>
+
+
+
+                    </ul>
+                </li>
+
         </div>
-      </div>
     </div>
-  </nav>
+</nav>
+<style>
+    body {
+        font-family: "Lato", sans-serif;
+    }
+    
+    body::-webkit-scrollbar {
+        width: 0.5rem;
+    }
+    
+    body::-webkit-scrollbar-track {
+        background: #1e1e24;
+    }
+    
+    body::-webkit-scrollbar-thumb {
+        background: #6649b8;
+    }
+    
+    .nav-link:hover {
+        color: white;
+        border-bottom: #6649b8 solid 2px;
+        margin-left: 2px;
+    }
+    
+    .navbar {
+        font-size: 1.5rem;
+    }
+    
+    .navbar-brand {
+        font-size: 1.7rem;
+        padding-right: 5rem;
+    }
+    
+    .navbar__dropdown {
+        font-size: inherit;
+        width: 20vw;
+    }
+    
+    .navbar__container {
+        height: 4rem;
+        width: 60vw;
+    }
+    
+    @media screen and (max-width:80rem) {
+        .navbar__container {
+            height: inherit;
+            width: 90vw;
+        }
+        .navbar__dropdown {
+            width: inherit;
+        }
+    }
+</style>

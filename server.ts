@@ -1,4 +1,6 @@
 //requiring some stuff for our app
+import { Request, Response } from "express";
+
 import express from "express";
 import dotenv from "dotenv";
 import path from "path";
@@ -13,7 +15,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.set('view engine','ejs');
 app.set('views', path.join(__dirname,'../views'));
-app.use(express.static('../public'));
+app.use(express.static('public'));
 
 //importing sessions & Declaring merging on express-session
 import sessions from 'express-session';
@@ -72,13 +74,26 @@ app.use(sessions(sessionOption));
 
 
 
+
+app.use((req:Request, res:Response, next:Function) => {
+    // res.locals.success = req.flash("success");
+    // res.locals.danger = req.flash("danger");
+    res.locals.active_user_email = req.session.active_user_email;
+    res.locals.active_user_id = req.session.active_user_id;
+    res.locals.active_user_nickname=req.session.active_user_nickname;
+    
+    // console.log("success >>",res.locals.success);
+    // console.log("danger >>",res.locals.danger);
+    
+    // console.log("user_email >>",res.locals.active_user_email);
+    // console.log("user_id  >>",res.locals.active_user_id);
+    next()
+})
+
+
 //use routes 
 import Router from "./routes/index";
 app.use(Router);
-
-
-
-
 
 //make our app listen on port 3000
 const PORT = process.env.PORT || 3000;

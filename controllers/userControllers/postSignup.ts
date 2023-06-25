@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import * as myModels from "../../models/index";
 import bcrypt from "bcryptjs";
-import { type } from "os";
+
 
 
 export const postSignup = async (req: Request, res: Response) => {

@@ -3,7 +3,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-//requiring some stuff for our app
 const express_1 = __importDefault(require("express"));
 const dotenv_1 = __importDefault(require("dotenv"));
 const path_1 = __importDefault(require("path"));
@@ -14,7 +13,7 @@ app.use(express_1.default.urlencoded({ extended: true }));
 app.use(express_1.default.json());
 app.set('view engine', 'ejs');
 app.set('views', path_1.default.join(__dirname, '../views'));
-app.use(express_1.default.static('../public'));
+app.use(express_1.default.static('public'));
 //importing sessions & Declaring merging on express-session
 const express_session_1 = __importDefault(require("express-session"));
 //requiring mosgoStore for storing our sessions in mongo Atlas DB
@@ -48,6 +47,18 @@ const sessionOption = {
     }
 };
 app.use((0, express_session_1.default)(sessionOption));
+app.use((req, res, next) => {
+    // res.locals.success = req.flash("success");
+    // res.locals.danger = req.flash("danger");
+    res.locals.active_user_email = req.session.active_user_email;
+    res.locals.active_user_id = req.session.active_user_id;
+    res.locals.active_user_nickname = req.session.active_user_nickname;
+    // console.log("success >>",res.locals.success);
+    // console.log("danger >>",res.locals.danger);
+    // console.log("user_email >>",res.locals.active_user_email);
+    // console.log("user_id  >>",res.locals.active_user_id);
+    next();
+});
 //use routes 
 const index_1 = __importDefault(require("./routes/index"));
 app.use(index_1.default);
