@@ -2,6 +2,6 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getSignup = void 0;
 const getSignup = (req, res) => {
-    return res.send("Signup page is comming soon in views!");
+    return res.render("signup");
 };
 exports.getSignup = getSignup;

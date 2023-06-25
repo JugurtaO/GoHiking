@@ -4,7 +4,9 @@ import { Request,Response } from "express";
 export const postLogout= (req:Request,res:Response)=>{
 
     if(!req.session.active_user_email){
+        
         return res.send("already logged out !");
+
     }
     
     console.log(">>>>>>>>>zemzemmzmzmzmmzmzm");
