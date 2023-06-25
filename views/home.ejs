@@ -26,7 +26,7 @@
                         <a class="nav-link" href="/users/login">Login</a>
                         <a class="nav-link" href="/users/signup">SignUp</a>
                         <% } else { %>
-                            <a class="nav-link" href="/users/logout">Logout</a>
+                            <a class="nav-link" href="/users/logout" >Logout</a>
                             <a class="nav-link" href="/users/signout">SignOut</a>
                             <% } %>
 
@@ -45,6 +45,7 @@
             </div>
         </main>
         <footer class="mt-auto text-muted">
+            <h2>logged as <%= active_user_nickname %></h2>
             &copy; 2023
         </footer>
 

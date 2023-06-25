@@ -27,9 +27,15 @@
                                 <a class="nav-link" href="/users/signup"><i class="fas fa-user-plus"></i> Signup</a>
                             </li>
                             <% }else{ %>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="/users/logout"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
-
+                            <li class="nav-item">
+                                <form action="/users/logout" method="post">
+                                    <button type="submit" class="btn btn-dark px-3 me-2" >
+                                      Logout
+                                    </button>
+                                  </form>
+                            </li>
+                                
+                                  
                                 <li class="nav-item">
                                     <a class="nav-link" href="/users/signout"><i class="fas fa-user-minus"></i> Signout</a>
                                 </li>
@@ -93,5 +99,18 @@
         .navbar__dropdown {
             width: inherit;
         }
+
     }
+    
+    .btn {
+        color: gray;
+        font-size: 23px;
+
+    }
+   .btn:hover {
+        color: white;
+        border-bottom: #6649b8 solid 2px;
+        margin-left: 2px;
+    }
+    
 </style>
