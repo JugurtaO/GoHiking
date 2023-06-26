@@ -11,7 +11,7 @@ export const viewTrail = (req: Request, res: Response) => {
         if (trail === null)
             return res.send("No trail was found, login and let's create one.")
 
-        return res.json(Trail);
+        return res.render("viewTrail",{Trail});
 
     }).catch(err => {
         return res.send("error payload set to"+ err);

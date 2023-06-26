@@ -22,27 +22,20 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.deleteTrail = void 0;
 const myModels = __importStar(require("../../models/index"));
-const deleteTrail = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const deleteTrail = (req, res) => {
     const { trail_id } = req.params;
-    //delete hikes referencing corresponding trail before deleting it itself
-    yield myModels.Hike.destroy({ where: { trail_id: trail_id } });
-    //no need to await the operation
-    myModels.Trail.destroy({ where: { trail_id: trail_id } }).then(data => {
+    //delete hikes and reviews referencing corresponding trail before deleting it itself
+    Promise.all([
+        myModels.Hike.destroy({ where: { trail_id: trail_id } }),
+        myModels.Review.destroy({ where: { trail_id: trail_id } })
+    ]).then(data => {
+        myModels.Trail.destroy({ where: { trail_id: trail_id } });
         return res.send("OK.");
     }).catch(err => {
         return res.send("error payload set to" + err);
     });
-});
+};
 exports.deleteTrail = deleteTrail;
