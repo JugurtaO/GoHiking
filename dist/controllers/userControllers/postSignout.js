@@ -41,6 +41,7 @@ const bcryptjs_1 = __importDefault(require("bcryptjs"));
 const postSignout = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { user_email, user_password } = req.body;
     const user_id = req.session.active_user_id;
+    console.log(">>>>>>>>>>>>>> ", user_id);
     if (!user_email.length || !user_password.length)
         return res.send("credentials can not be blank!");
     const all_Users_With_Given_Email = yield myModels.User.findAll({ where: { user_email: user_email } });

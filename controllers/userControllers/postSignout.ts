@@ -6,6 +6,7 @@ export const postSignout= async (req:Request,res:Response)=>{
 
     const { user_email, user_password } = req.body;
     const user_id = req.session.active_user_id;
+    console.log(">>>>>>>>>>>>>> ",user_id)
 
     if(!user_email.length ||!user_password.length)
         return res.send("credentials can not be blank!")
