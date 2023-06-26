@@ -13,10 +13,10 @@ export const deleteTrail =  (req: Request, res: Response) => {
 
     ]).then(data=>{
         myModels.Trail.destroy({ where: { trail_id: trail_id } })
-            return res.send("OK.")
+            return res.redirect("trails")
 
     }).catch(err=>{
-        return res.send("error payload set to"+ err);
+        return res.send("error payload set to "+ err);
     })
 
 

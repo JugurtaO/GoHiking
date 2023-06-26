@@ -29,11 +29,11 @@ const viewTrail = (req, res) => {
     const { trail_id } = req.params;
     const trail = myModels.Trail.findOne({ where: { trail_id: trail_id } });
     trail.then(Trail => {
-        if (trail === null)
+        if (Trail === null)
             return res.send("No trail was found, login and let's create one.");
         return res.render("viewTrail", { Trail });
     }).catch(err => {
-        return res.send("error payload set to" + err);
+        return res.send("error payload set to " + err);
     });
 };
 exports.viewTrail = viewTrail;
