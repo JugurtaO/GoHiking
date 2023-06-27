@@ -9,7 +9,7 @@ html {
     font-size: 62.5%;
 }
 
-@media screen and (max-width: 70rem) {
+@media screen and (max-width:70rem) {
     html {
         font-size: 55%;
     }
@@ -18,23 +18,23 @@ html {
 body {
     font-size: 1.6rem;
     height: 100vh;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("https://images.unsplash.com/photo-1505232070786-2f46d15f9f5e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1678&q=80");
+    background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url("https://images.unsplash.com/photo-1544062336-1a0da2fff895?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8MTZ8Nzg3OTY5OTh8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60");
     background-size: cover;
     background-position: center;
     text-shadow: 0 0.05rem 0.1rem rgba(0, 0, 0, 0.5);
     box-shadow: inset 0 0 5rem rgba(0, 0, 0, 0.5);
 }
 
-.signup-box {
+.signout-box {
     width: 25rem;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    color: white;
+    color: #fff;
 }
 
-.signup-box h1 {
+.signout-box h1 {
     float: left;
     font-size: 4rem;
     border-bottom: 0.6rem solid #f07c00;
@@ -54,12 +54,12 @@ body {
     width: 2.6rem;
     float: left;
     text-align: center;
-    border-bottom: 0.2rem solid #f07c00;
+    border-bottom: 0.1rem solid #f07c00;
 }
 
 .textbox input {
     border: none;
-    border-bottom: 0.2rem solid #f07c00;
+    border-bottom: 0.1rem solid #f07c00;
     outline: none;
     background: none;
     color: white;
@@ -69,17 +69,25 @@ body {
     margin: 0 1rem;
 }
 
-.btn {
+.textbox input::placeholder {
+    color: #fff;
+}
+
+#signout-btn__btn, #signout-box__btn {
     width: 94%;
     background: none;
     color: white;
     padding: 0.5rem;
-    font-size: 1.8rem;
+    font-size: 1.8rem !important;
     cursor: pointer;
     margin: 1.2rem 0;
     margin-left: 3%;
 }
-
+#signout-box__btn:hover {
+    color: #000;
+    background-color: #ffc107;
+    border-color: #ffc107;
+}
 .invalid-feedback {
     margin-left: 1rem;
 }

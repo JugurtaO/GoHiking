@@ -33,6 +33,7 @@ export const postLogin = async (req: Request, res: Response) => {
     req.session.active_user_email = user_email;
     req.session.active_user_id = userInDB[0].dataValues.user_id;
     req.session.active_user_nickname = userInDB[0].dataValues.user_nickname;
-    return res.send("OK.");
+    // return res.send("OK.");
+    return res.redirect("/trails");
 
 }

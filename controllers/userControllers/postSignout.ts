@@ -31,12 +31,12 @@ export const postSignout= async (req:Request,res:Response)=>{
 
     Promise.all([
         myModels.Hike.destroy({where:{user_id:user_id}}),
-        myModels.Trail.destroy({where:{user_id:user_id}})
+        myModels.Trail.destroy({where:{author_id:user_id}})
 
-    ]
-    ).then(data=>{
+    ]).then(data=>{
         //now delete user
         myModels.User.destroy({where:{user_email:user_email}});
+        
 
 
         //set user session flags to null  <--> session killed
@@ -45,7 +45,8 @@ export const postSignout= async (req:Request,res:Response)=>{
         req.session.active_user_nickname=null;
     
     
-        res.send("Successfuly signed  out.")
+        // res.send("Successfuly signed  out. Good Bye")
+        res.redirect("/users/signup");
 
     })
     .catch(err=>{

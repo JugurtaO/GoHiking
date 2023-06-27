@@ -1,12 +1,13 @@
 <title>
 
-    SignUp</title>
+    SignOut</title>
 
-    <link rel="stylesheet" href="/signup.css">
+    <link rel="stylesheet" href="/signout.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" type="image/x-icon" href="https://icons8.com/icon/16958/trekking" />
-    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css"
         integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
@@ -14,33 +15,32 @@
 
 
     </head>
-    <%- include('./partials/navbar.ejs') %>
+    
+    <body>
+        <%- include('./partials/navbar.ejs') %>
 
-        <body>
-         
+            <form action="/users/signout" method="post" class="needs-validation" novalidate>
+                <div class="signout-box">
+                    <h1>SignOut</h1>
+                    <div class="textbox">
+                        <i class="fas fa-at"></i>
+                        <input type="email" placeholder="Email" name="user_email" required>
+                        <div class="valid-feedback">Looks Good!</div>
+                        <div class="invalid-feedback">Invalid Email</div>
 
-                <form action="/users/signout" method="post" class="needs-validation" novalidate>
-                    <div class="signup-box">
-                        <div class="signup-box__header">
-                            <h1>SignOut</h1>
-                        </div>
-                        <div class="textbox">
-                            <i class="fas fa-at"></i>
-                            <input type="email" placeholder="Email" name="user_email" required>
-                            <div class="valid-feedback">Looks Good!</div>
-                            <div class="invalid-feedback">Invalid Email</div>
-
-                        </div>
-                        <div class="textbox">
-                            <i class="fas fa-lock"></i>
-                            <input type="password" placeholder="Password" name="user_password" required>
-                            <div class="valid-feedback">Looks Good!</div>
-                            <div class="invalid-feedback">Invalid Password</div>
-                        </div>
-                        <button id="signup-box__btn" class="btn btn-outline-warning my-3"><i class="fas fa-user-plus"></i> SignOut</button>
                     </div>
-                </form>
+                    <div class="textbox">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" placeholder="Password" name="user_password" required>
+                        <div class="valid-feedback">Looks Good!</div>
+                        <div class="invalid-feedback">Invalid Password</div>
+
+                    </div>
+                    <button id="signout-box__btn" class="btn btn-outline-warning my-3"><i
+                            class="fas fa-user-minus"></i> Signout</button>
+                </div>
+            </form>
 
 
-        </body>
+    </body>
     </html>

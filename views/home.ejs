@@ -2,61 +2,62 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" type="image/x-icon" href="https://icons8.com/icon/16958/trekking" />
-    
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css"
-        integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
-        integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous">
-    <link rel="stylesheet" href="/home.css">
-    <title> JO-Hikes</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" type="image/x-icon" href="https://icons8.com/icon/16958/trekking" />
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous">
+  <link rel="stylesheet" href="/home.css">
+  <title> JO-Hikes</title>
 </head>
 
 <body class="d-flex text-center text-white bg-dark">
-    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
-        <header class="mb-auto header">
-            <div>
-                <h3 class="float-md-left mb-5 header__logo"><i class="fas fa-hiking"></i> JO-Hikes</h3>
-                <nav class="nav nav-masthead justify-content-center float-md-right header__navbar">
-                    <a class="nav-link active" aria-current="page" href="#">Home</a>
-                    <a class="nav-link" href="/about">About Us</a>
-                    <% if(!active_user_email) { %>
-                        <a class="nav-link" href="/users/login">Login</a>
-                        <a class="nav-link" href="/users/signup">SignUp</a>
-                        <% } else { %>
-                            <a class="nav-link" href="/users/logout" >Logout</a>
-                            <a class="nav-link" href="/users/signout">SignOut</a>
-                            <% } %>
+  <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+    <header class="mb-auto header">
+      <div>
+        <h3 class="float-md-left mb-5 header__logo"><i class="fas fa-hiking"></i> JO-Hikes</h3>
+        <nav class="nav nav-masthead justify-content-center float-md-right header__navbar">
+          <a class="nav-link active" aria-current="page" href="#">Home</a>
+          <a class="nav-link" href="/about">About Us</a>
+          <% if(!active_user_email) { %>
+          <a class="nav-link" href="/users/login">Login</a>
+          <a class="nav-link" href="/users/signup">SignUp</a>
+          <% } else { %>
+            <form action="/users/logout" method="post">
+                <button class="btn btn-dark bg-transparent" style="margin-top: 0px; border: none;color:rgba(255, 255, 255, 0.5);"> Logout</button>
+
+            </form>
+          <!-- <a class="nav-link" href="/users/logout">Logout</a> -->
+          <a class="nav-link" href="/users/signout">SignOut</a>
+          <% } %>
 
 
-                </nav>
-            </div>
-        </header>
-        <main>
-            <div class="section-about">
+        </nav>
+      </div>
+    </header>
+    <main>
+      <div class="section-about">
 
-                <h1 class="heading-primary"><i class="fas fa-hiking "></i> JO-Hikes</h1>
-                <p class="lead paragraph"> Welcome To JO-Hikes! find your next Hike and go for it for free! Find Trails that fit your nature, add your favorite one and Leave reviews on other's ones. JO-Hikes, <span style="font-weight: bold;color: white;"> live the adventure!</span></p>
-                <a href="/trails" class="btn btn-md btn-secondary font-weight-bold border-white bg-white">View
-                    Trails <i class="fas fa-map-signs"></i>  </a>
-            </div>
-        </main>
-        <footer class="mt-auto text-muted">
-            <h2>logged as <%= active_user_nickname %></h2>
-            &copy; 2023
-        </footer>
+        <h1 class="heading-primary"><i class="fas fa-hiking "></i> JO-Hikes</h1>
+        <p class="lead paragraph"> Welcome To JO-Hikes! find your next Hike and go for it for free! Find Trails that fit your nature, add your favorite one and Leave reviews on other's ones. JO-Hikes, <span style="font-weight: bold;color: white;"> live the adventure!</span></p>
+        <a href="/trails" class="btn btn-md btn-secondary font-weight-bold border-white bg-white">View
+          Trails <i class="fas fa-map-signs"></i> </a>
+      </div>
+    </main>
+    <footer class="mt-auto text-muted">
+      <% if (active_user_email) { %>
+      <h2 style="color: white;">Logged as <%= active_user_nickname %></h2>
+      <% } %>
 
-    </div>
+      &copy; 2023
+    </footer>
+
+  </div>
 
 
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-        crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js"
-        integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/"
-        crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous"></script>
 </body>
 
 </html>

@@ -21,7 +21,7 @@ body {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-size: 1.6rem;
     height: 100vh;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("https://source.unsplash.com/collection/515097");
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("https://images.unsplash.com/photo-1551632811-561732d1e306?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -87,4 +87,22 @@ body {
     border-bottom: transparent solid 2px;
     transition: all ease-in-out 0.3s;
 }
+
+form button:hover {
+    color: rgba(255, 255, 255, 1);
+    border-bottom-color: rgba(255, 255, 255, 1);
+}
+form button {
+    padding: 0.25rem 0;
+    font-weight: 400;
+    color:#212529;
+    margin-left: 1rem;
+    border-bottom: 0.25rem solid transparent;
+    
+}
+form button.active {
+    color: white;
+    border-bottom-color: white;
+}
+
 

@@ -8,7 +8,6 @@ export const addTrail= async (req:Request,res:Response)=>{
 
 
 
-    // console.log(">>>>>>>>>>>> ", trail_name,trail_location,difficulty_level, trail_image,author_id);
 
     if (!trail_name.length || !trail_location.length || !difficulty_level.length || !trail_image.length)
         return res.send("Trail characteristics cannot be blank!!")
@@ -25,7 +24,7 @@ export const addTrail= async (req:Request,res:Response)=>{
     //no need to await the operation the user cannot see the effect behind the scenes
     const newTrail= myModels.Trail.create({trail_name:trail_name ,trail_location:trail_location ,difficulty_level:difficulty_level,trail_image:trail_image,author_id:author_id})
     .then(data=>{
-        return res.send("OK.");
+        return res.redirect(`/trails/${data.dataValues.trail_id}`);
        
     }).catch(err=>{
         res.send("error set to "+err);
