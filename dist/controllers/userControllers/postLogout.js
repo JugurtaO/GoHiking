@@ -9,6 +9,7 @@ const postLogout = (req, res) => {
     req.session.active_user_email = null;
     req.session.active_user_id = null;
     req.session.active_user_nickname = null;
-    res.send("Successfuly logged out.");
+    // res.send("Successfuly logged out.")
+    return res.redirect("/users/login");
 };
 exports.postLogout = postLogout;

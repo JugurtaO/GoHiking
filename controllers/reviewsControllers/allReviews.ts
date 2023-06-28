@@ -4,8 +4,6 @@ import * as myModels from "../../models/index";
 export const allReviews = (req: Request, res: Response) => {
 
     const {trail_id}=req.params;
-    console.log(req.params);
-    console.log("trail_id >>>",trail_id);
     
     //no need to await the operation
     const Reviews = myModels.Review.findAll({where:{trail_id:trail_id}});

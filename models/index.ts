@@ -107,6 +107,11 @@ export const Trail = db_handler.define("Trail", {
             type: DataTypes.STRING(256),
             allowNull: false
         },
+        review_rating:{
+            type: DataTypes.INTEGER,
+            allowNull:false
+
+        },
         author_id: {
             type: DataTypes.INTEGER,
             allowNull: false

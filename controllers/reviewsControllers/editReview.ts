@@ -3,7 +3,7 @@ import * as myModels from "../../models/index";
 
 export const editReview = async (req: Request, res: Response) => {
 
-    const { new_review_text }: { new_review_text: String } = req.body;
+    const { new_review_text,new_review_rating }: { new_review_text: String,new_review_rating:String } = req.body;
     const { review_id } = req.params;
 
     if (!new_review_text.length)
@@ -20,7 +20,7 @@ export const editReview = async (req: Request, res: Response) => {
 
 
     //UPDATE REVIEW
-    myModels.Review.update({review_text:new_review_text},{where:{review_id:review_id}})
+    myModels.Review.update({review_text:new_review_text,review_rating:new_review_rating},{where:{review_id:review_id}})
     .then(data=>{
         return res.send("OK.")
     }).catch(err=>{

@@ -35,7 +35,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.editReview = void 0;
 const myModels = __importStar(require("../../models/index"));
 const editReview = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { new_review_text } = req.body;
+    const { new_review_text, new_review_rating } = req.body;
     const { review_id } = req.params;
     if (!new_review_text.length)
         return res.send("Review cannot be blank, leave something !");
@@ -45,7 +45,7 @@ const editReview = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
     if (allReviews[0].dataValues.author_id != req.session.active_user_id)
         return res.status(401).send("not authorized to edit review !");
     //UPDATE REVIEW
-    myModels.Review.update({ review_text: new_review_text }, { where: { review_id: review_id } })
+    myModels.Review.update({ review_text: new_review_text, review_rating: new_review_rating }, { where: { review_id: review_id } })
         .then(data => {
         return res.send("OK.");
     }).catch(err => {

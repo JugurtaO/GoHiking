@@ -55,7 +55,8 @@ const postSignout = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
     //delete user hikes and delete created user trails concurrently as we don't need to await them ( each one doesn't depend on the other)
     Promise.all([
         myModels.Hike.destroy({ where: { user_id: user_id } }),
-        myModels.Trail.destroy({ where: { author_id: user_id } })
+        myModels.Trail.destroy({ where: { author_id: user_id } }),
+        myModels.Review.destroy({ where: { author_id: user_id } })
     ]).then(data => {
         //now delete user
         myModels.User.destroy({ where: { user_email: user_email } });

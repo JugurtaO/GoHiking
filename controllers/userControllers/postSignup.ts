@@ -36,7 +36,8 @@ export const postSignup = async (req: Request, res: Response) => {
         req.session.active_user_nickname = data.dataValues.user_nickname;
 
 
-        return res.send("OK.");
+        // return res.send("OK.");
+        return res.redirect("/");
 
 
     }).catch( err =>{

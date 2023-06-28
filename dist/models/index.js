@@ -90,6 +90,10 @@ exports.Review = config_1.db_handler.define("Review", {
         type: sequelize_1.DataTypes.STRING(256),
         allowNull: false
     },
+    review_rating: {
+        type: sequelize_1.DataTypes.INTEGER,
+        allowNull: false
+    },
     author_id: {
         type: sequelize_1.DataTypes.INTEGER,
         allowNull: false

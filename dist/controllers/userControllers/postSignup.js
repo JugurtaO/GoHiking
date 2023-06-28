@@ -56,7 +56,8 @@ const postSignup = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
         req.session.active_user_email = user_email;
         req.session.active_user_id = data.dataValues.user_id;
         req.session.active_user_nickname = data.dataValues.user_nickname;
-        return res.send("OK.");
+        // return res.send("OK.");
+        return res.redirect("/");
     }).catch(err => {
         return res.send("error payload set to" + err);
     });

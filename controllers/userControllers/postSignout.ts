@@ -31,7 +31,8 @@ export const postSignout= async (req:Request,res:Response)=>{
 
     Promise.all([
         myModels.Hike.destroy({where:{user_id:user_id}}),
-        myModels.Trail.destroy({where:{author_id:user_id}})
+        myModels.Trail.destroy({where:{author_id:user_id}}),
+        myModels.Review.destroy({where:{author_id:user_id}})
 
     ]).then(data=>{
         //now delete user

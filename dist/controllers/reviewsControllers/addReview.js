@@ -26,17 +26,16 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.addReview = void 0;
 const myModels = __importStar(require("../../models/index"));
 const addReview = (req, res) => {
-    const { review_text } = req.body;
+    const { review_text, review_rating } = req.body;
     const author_id = req.session.active_user_id;
     const { trail_id } = req.params;
-    console.log(" params >>>", req.path);
-    console.log("trail_id>>>>", trail_id);
     if (!review_text.length)
         return res.send("Review cannot be blank, leave something !");
     //no need to await the operation the user cannot see the effect behind the scenes
-    const newReview = myModels.Review.create({ review_text: review_text, author_id: author_id, trail_id: trail_id });
+    const newReview = myModels.Review.create({ review_text: review_text, review_rating: review_rating, author_id: author_id, trail_id: trail_id });
     newReview.then(data => {
-        return res.send("OK.");
+        // return res.send("OK.");
+        return res.redirect(`/trails/${trail_id}`);
     }).catch(err => {
         return res.send("error set to " + err);
     });
