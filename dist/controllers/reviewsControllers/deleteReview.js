@@ -35,7 +35,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.deleteReview = void 0;
 const myModels = __importStar(require("../../models/index"));
 const deleteReview = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { review_id } = req.params;
+    const { review_id, trail_id } = req.params;
     const allReviews = yield myModels.Review.findAll({ where: { review_id: review_id } });
     if (!allReviews.length || allReviews.length != 1)
         return res.send("no review found with given data");
@@ -43,7 +43,8 @@ const deleteReview = (req, res) => __awaiter(void 0, void 0, void 0, function* (
         return res.status(401).send("not authorized to delete review !");
     const review = myModels.Review.destroy({ where: { review_id: review_id } })
         .then(data => {
-        return res.send("OK.");
+        // return res.send("OK.");
+        return res.redirect(`/trails/${trail_id}`);
     }).catch(err => {
         return res.send("error set to" + err);
     });

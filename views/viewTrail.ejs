@@ -61,9 +61,12 @@
       <% allReviews.forEach(review => { %>
         <div class="card mb-3">
           <div class=" card-body">
-            <h5 class="card-title">Rating: <%= review.review_rating %></h5>
-          
+            <h5 class="card-title">Rating: <%= review.review_rating %></h5> 
+            <h6 class="card-subtitle mb-2 text-muted"></h6>
             <p class="card-text"> Review: <%= review.review_text %></p>
+            <form action="/trails/<%= Trail.trail_id %>/reviews/<%= review.review_id%>/delete" method="post">
+            <button class="btn btn-sm btn-danger" style="color: white;">Delete</button>
+            </form>
           </div>
         </div>
        

@@ -3,8 +3,7 @@ import * as myModels from "../../models/index";
 
 export const deleteReview= async (req:Request,res:Response)=>{
 
-    const {review_id}=req.params;
-
+    const {review_id,trail_id}=req.params;
 
     const allReviews=await myModels.Review.findAll({where:{review_id:review_id}});
     
@@ -17,7 +16,8 @@ export const deleteReview= async (req:Request,res:Response)=>{
 
     const review=myModels.Review.destroy({where:{review_id:review_id}})
     .then(data=>{
-        return res.send("OK.");
+        // return res.send("OK.");
+        return res.redirect(`/trails/${trail_id}`)
     }).catch(err=>{
         return res.send("error set to"+err);
     });
