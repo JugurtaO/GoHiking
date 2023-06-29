@@ -12,7 +12,7 @@ export const allTrails = (req: Request, res: Response) => {
         if (!allTrails.length)
             return res.send("No trail was found, login and let's create one.")
 
-
+        
         return res.render("trails", { allTrails });
 
     }).catch(err => {

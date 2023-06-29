@@ -1,9 +1,9 @@
 
-import { DataTypes } from "sequelize";
+import { Model,DataTypes } from "sequelize";
 import { db_handler } from "../database/config";
 
 //Creating an instance of User from Users entity
-export const User = db_handler.define("User", {
+ export const User = db_handler.define("User", {
     user_id: {
         autoIncrement: true,
         type: DataTypes.INTEGER,
@@ -145,3 +145,13 @@ export const Hike = db_handler.define("Hike", {
         timestamps: false
     });
 
+
+//////////////////////////////:::Associating models 
+
+User.hasMany(Trail,{foreignKey:'author_id'});
+Trail.belongsTo(User,{foreignKey:'author_id'});
+
+Trail.hasMany(Review,{foreignKey:'author_id'});
+
+Review.belongsTo(Trail,{foreignKey:'author_id'});
+Review.belongsTo(User,{foreignKey:'author_id'});

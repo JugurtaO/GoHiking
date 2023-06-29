@@ -122,3 +122,9 @@ exports.Hike = config_1.db_handler.define("Hike", {
     tableName: "Hikes",
     timestamps: false
 });
+//////////////////////////////:::Associating models 
+exports.User.hasMany(exports.Trail, { foreignKey: 'author_id' });
+exports.Trail.belongsTo(exports.User, { foreignKey: 'author_id' });
+exports.Trail.hasMany(exports.Review, { foreignKey: 'author_id' });
+exports.Review.belongsTo(exports.Trail, { foreignKey: 'author_id' });
+exports.Review.belongsTo(exports.User, { foreignKey: 'author_id' });
