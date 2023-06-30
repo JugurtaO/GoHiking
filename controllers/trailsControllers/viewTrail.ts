@@ -13,13 +13,11 @@ export const viewTrail = (req: Request, res: Response) => {
 
         
             
-        // load all trail reviews
-        // no need to await the operation
+        // load all trail reviews & their author| no need to await the operation
         const Reviews = myModels.Review.findAll({include:{model:myModels.User},where: { trail_id: trail_id }, limit: 5 });
 
 
         Reviews.then(allReviews => {
-            console.log(">>>>>>>>>", allReviews);
             return res.render("viewTrail", { Trail, allReviews });
         })
 
