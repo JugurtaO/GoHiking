@@ -18,93 +18,90 @@
 <body class="text-center">
   <%- include('./partials/navbar') %>
   <%- include('./partials/flashMsg.ejs') %>
-<main class="container mt-5">
-  <div class="row" >
-    <div class="col-6">
-      <div class="card mb-5">
-        <img src="<%= Trail.trail_image %>" class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 class="card-title"> <%= Trail.trail_name %></h5>
+  <main class="container mt-5">
+    <div class="row">
+      <div class="col-6">
+        <div class="card mb-5">
+          <img src="<%= Trail.trail_image %>" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title"> <%= Trail.trail_name %></h5>
 
-        </div>
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item text-muted"><%= Trail.trail_location %></li>
+          </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item text-muted"><%= Trail.trail_location %></li>
 
-        </ul>
-        <div class="card-body">
-          <form class="d-inline" action="/trails/<%=Trail.trail_id%>/delete" method="post">
+          </ul>
+          <div class="card-body">
+            <form class="d-inline" action="/trails/<%=Trail.trail_id%>/delete" method="post">
 
-            <button class="btn btn-danger" style="color: white;" type="submit"> Delete</button>
-          </form>
+              <button class="btn btn-danger" style="color: white;" type="submit"> Delete</button>
+            </form>
 
-          <a href="/trails" class="card-link btn btn-info" style="color: white;">All trails</a>
+            <a href="/trails" class="card-link btn btn-info" style="color: white;">All trails</a>
+          </div>
+
         </div>
 
       </div>
-      
-    </div>
 
-    <div class="col-xs-6 col-md-4 mx-2  card my-5 shadow-lg p-3  mb-5 bg-body rounded" id="postReviewForm" >
-    <div class="card-body mt-5">
-        <div class="card-title">
-        </div>
-        <form class="form-groupe" action="/trails/<%= Trail.trail_id %>/reviews/add"
-            method="post">
+      <div class="col-xs-6 col-md-4 mx-2  card my-5 shadow-lg p-3  mb-5 bg-body rounded" id="postReviewForm">
+        <div class="card-body mt-5">
+          <div class="card-title">
+          </div>
+          <form class="form-groupe" action="/trails/<%= Trail.trail_id %>/reviews/add" method="post">
             <h1 class="mb-5">Leave Feedback!</h1>
 
             <section id="starsRating">
-                <div class="col-3 ">
-                  <fieldset class="starability-basic">
-            
-                    <input type="radio" id="no-rate" class="input-no-rate" name="review_rating" value="" checked aria-label="No rating." />
-                    <input type="radio" id="first-rate1" name="review_rating" value="1" />
-                    <label for="first-rate1" title="Terrible">1 star</label>
-                    <input type="radio" id="first-rate2" name="review_rating" value="2" />
-                    <label for="first-rate2" title="Not good">2 stars</label>
-                    <input type="radio" id="first-rate3" name="review_rating" value="3" />
-                    <label for="first-rate3" title="Average">3 stars</label>
-                    <input type="radio" id="first-rate4" name="review_rating" value="4" />
-                    <label for="first-rate4" title="Very good">4 stars</label>
-                    <input type="radio" id="first-rate5" name="review_rating" value="5" />
-                    <label for="first-rate5" title="Amazing">5 stars</label>
-                  </fieldset>
+              <div class="col-3 ">
+                <fieldset class="starability-basic">
 
-                </div>
+                  <input type="radio" id="no-rate" class="input-no-rate" name="review_rating" value="" checked aria-label="No rating." />
+                  <input type="radio" id="first-rate1" name="review_rating" value="1" />
+                  <label for="first-rate1" title="Terrible">1 star</label>
+                  <input type="radio" id="first-rate2" name="review_rating" value="2" />
+                  <label for="first-rate2" title="Not good">2 stars</label>
+                  <input type="radio" id="first-rate3" name="review_rating" value="3" />
+                  <label for="first-rate3" title="Average">3 stars</label>
+                  <input type="radio" id="first-rate4" name="review_rating" value="4" />
+                  <label for="first-rate4" title="Very good">4 stars</label>
+                  <input type="radio" id="first-rate5" name="review_rating" value="5" />
+                  <label for="first-rate5" title="Amazing">5 stars</label>
+                </fieldset>
+
+              </div>
             </section>
             <div class="mb-3">
-                <textarea class="form-control" name="review_text" id="review_text"
-                    cols="60" rows="3" placeholder="Tell us more about this trail!"
-                    autofocus></textarea>
+              <textarea class="form-control" name="review_text" id="review_text" cols="60" rows="3" placeholder="Tell us more about this trail!" autofocus></textarea>
             </div>
             <button class="btn btn-outline-success btn-lg mt-5 ">Post</button>
 
-        </form>
+          </form>
 
-    </div>
-</div>
-
-</div>
-
-
-      <% allReviews.forEach(review => { %>
-        <div class="card mb-3">
-          <div class=" card-body">
-            <h6 class="card-subtitle mb-2 text-muted"> <%= review.User.user_nickname %></h6>
-            <p class="starability-result" data-rating="<%= review.review_rating %>">
-              <!-- Rated: <%= review.review_rating %> stars -->
-            </p>
-            <p class="card-text"> Review: <%= review.review_text %></p>
-            <form action="/trails/<%= Trail.trail_id %>/reviews/<%= review.review_id%>/delete" method="post">
-            <button class="btn btn-sm btn-danger" style="color: white;">Delete</button>
-            </form>
-          </div>
         </div>
-       
-       
-      <% }) %>
+      </div>
+
     </div>
-  </div>
-</main>
+
+
+    <% allReviews.forEach(review => { %>
+    <div class="card mb-3">
+      <div class=" card-body">
+        <h6 class="card-subtitle mb-2 text-muted"> <%= review.User.user_nickname %></h6>
+        <p class="starability-result" data-rating="<%= review.review_rating %>">
+           <%= review.review_rating %> stars
+        </p>
+        <p class="card-text"> <%= review.review_text %></p>
+        <form action="/trails/<%= Trail.trail_id %>/reviews/<%= review.review_id%>/delete" method="post">
+          <button class="btn btn-sm btn-danger" style="color: white;">Delete</button>
+        </form>
+      </div>
+    </div>
+
+
+    <% }) %>
+    </div>
+    </div>
+  </main>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
 
