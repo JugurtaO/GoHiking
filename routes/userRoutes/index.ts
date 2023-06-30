@@ -1,7 +1,7 @@
 import express from "express";
 import * as userControllers from "../../controllers/userControllers/index";
 import * as trailControllers from "../../controllers/trailsControllers/index";
-
+import { sanitize } from "../../middlewares/sanitization/sanitize";
 
 const userRouter=express.Router();
 
@@ -14,10 +14,10 @@ userRouter.get("/trails",trailControllers.userTrails);
 
 
 
-userRouter.post("/login",userControllers.postLogin);
-userRouter.post("/signup",userControllers.postSignup);
-userRouter.post("/logout",userControllers.postLogout);
-userRouter.post("/signout",userControllers.postSignout);
+userRouter.post("/login",  sanitize,userControllers.postLogin);
+userRouter.post("/signup", sanitize,userControllers.postSignup);
+userRouter.post("/logout", sanitize,userControllers.postLogout);
+userRouter.post("/signout",sanitize,userControllers.postSignout);
 
 
 

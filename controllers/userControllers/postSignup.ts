@@ -43,7 +43,7 @@ export const postSignup = async (req: Request, res: Response) => {
         req.session.active_user_id = data.dataValues.user_id;
         req.session.active_user_nickname = data.dataValues.user_nickname;
 
-
+        
 
         req.flash("success","Successfuly signed in, welcome to JO-Hikes!");
         return res.redirect("/");

@@ -42,7 +42,7 @@ const deleteReview = (req, res) => __awaiter(void 0, void 0, void 0, function* (
         return res.redirect(`/trails/${trail_id}`);
     }
     if (allReviews[0].dataValues.author_id != req.session.active_user_id) {
-        req.flash("danger", `not authorized to delete review !`);
+        req.flash("danger", `not authorized to delete this review !`);
         return res.status(401).redirect(`/trails/${trail_id}`);
     }
     const review = myModels.Review.destroy({ where: { review_id: review_id } })

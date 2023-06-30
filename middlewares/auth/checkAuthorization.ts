@@ -1,22 +1,60 @@
 import { Request,Response } from "express";
+import * as myModels from "../../models/index";
 
 
-
-//notice that i can implement middleware for each type of request according  to the route  structure 
-
-//this one it's an example when the user id is passed in params 
-//later i will not do that , i will verify it from session
-export const checkAuthorization = (req:Request,res:Response,next:Function) =>{
+export const checkAuthorizationForTrail = (req:Request,res:Response,next:Function) =>{
    
+    const {trail_id}=req.params;
+
     if(!req.session?.active_user_email){
-        // req.flash("danger", "Please log in to proceed.");
+        req.flash("danger", "Please log in to proceed.");
         return res.redirect("/users/login");
     }
   
-    if(req.session.active_user_id == req.params?.user_id){
-        return next();
-    }else{
-        return res.status(401).send("Not authorized.");
+
+    const trail=myModels.Trail.findOne({where:{trail_id:trail_id}});
+    trail.then(data=>{
+        if(req.session.active_user_id== data.dataValues.author_id){
+            return next();
+        }else{
+            req.flash("danger", "Not authorized!");
+            return res.status(401).redirect(`/trails/${trail_id}`);
+        }
+
+
+    }).catch(err=>{
+        res.send("Error payload set to"+ err);
+    })
+
+   
+    
+}
+
+
+export const checkAuthorizationForReview = (req:Request,res:Response,next:Function) =>{
+   
+    const {review_id,trail_id}=req.params;
+
+    if(!req.session?.active_user_email){
+        req.flash("danger", "Please log in to proceed.");
+        return res.redirect("/users/login");
     }
+  
+
+    const review=myModels.Review.findOne({where:{review_id:review_id}});
+    review.then(data=>{
+        if(req.session.active_user_id== data.dataValues.author_id){
+            return next();
+        }else{
+            req.flash("danger", "Not authorized!");
+            return res.status(401).redirect(`/trails/${trail_id}`);
+        }
+
+
+    }).catch(err=>{
+        res.send("Error payload set to"+ err);
+    })
+
+   
     
 }

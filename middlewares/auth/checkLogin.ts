@@ -1,8 +1,8 @@
 import { Request,Response } from "express";
 
-module.exports.checkLogin = (req:Request,res:Response,next:Function) => {
+export const checkLogin = (req:Request,res:Response,next:Function) => {
     if(!req.session.active_user_email){
-        // return res.send("Please login to proceed.");
+        req.flash("danger", "Please login to proceed.");
         return res.redirect("/users/login");
     }
     return next();

@@ -19,7 +19,7 @@ export const deleteReview= async (req:Request,res:Response)=>{
     
     if (allReviews[0].dataValues.author_id != req.session.active_user_id){
         
-        req.flash("danger",`not authorized to delete review !`);
+        req.flash("danger",`not authorized to delete this review !`);
         return res.status(401).redirect(`/trails/${trail_id}`);
         
     
