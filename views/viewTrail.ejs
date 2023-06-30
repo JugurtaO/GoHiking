@@ -3,6 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
+  <link rel="stylesheet" href="/stars.css">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
@@ -19,7 +20,7 @@
 
 
   <div class="row">
-    <div class="col-6 ">
+    <div class="col-6">
       <div class="card mb-5">
         <img src="<%= Trail.trail_image %>" class="card-img-top" alt="...">
         <div class="card-body">
@@ -45,15 +46,33 @@
     <div class="col-6">
       <h2>Leave a Review</h2>
       <form action="/trails/<%= Trail.trail_id %>/reviews/add" method="post" class="mb-3">
-        <div class="mb-3">
+        <!-- <div class="mb-3">
           <label class="form-label" for="rating">Rating </label>
           <input type="range" class="form-range" min="1" max="5" id="rating" name="review_rating">
 
+        </div> -->
+
+        <div class="mb-3">
+          <fieldset class="starability-basic">
+            
+            <input type="radio" id="no-rate" class="input-no-rate" name="review_rating" value="1" checked aria-label="No rating." />
+            <input type="radio" id="first-rate1" name="review_rating" value="1" />
+            <label for="first-rate1" title="Terrible">1 star</label>
+            <input type="radio" id="first-rate2" name="review_rating" value="2" />
+            <label for="first-rate2" title="Not good">2 stars</label>
+            <input type="radio" id="first-rate3" name="review_rating" value="3" />
+            <label for="first-rate3" title="Average">3 stars</label>
+            <input type="radio" id="first-rate4" name="review_rating" value="4" />
+            <label for="first-rate4" title="Very good">4 stars</label>
+            <input type="radio" id="first-rate5" name="review_rating" value="5" />
+            <label for="first-rate5" title="Amazing">5 stars</label>
+          </fieldset>
         </div>
+        
         <div class="mb-3">
           <div class="card-body"></div>
           <label class="form-label" for="body">Review </label>
-         <textarea class="form-control" name="review_text" id="body" cols="30" rows="3" required></textarea>
+         <textarea class="form-control" name="review_text" id="body" cols="30" rows="3" required placeholder="Review text ..."></textarea>
 
         </div>
 
@@ -62,8 +81,10 @@
       <% allReviews.forEach(review => { %>
         <div class="card mb-3">
           <div class=" card-body">
-            <h5 class="card-title">Rating: <%= review.review_rating %></h5> 
-            <h6 class="card-subtitle mb-2 text-muted"> By <%= review.User.user_nickname %></h6>
+            <h6 class="card-subtitle mb-2 text-muted"> <%= review.User.user_nickname %></h6>
+            <p class="starability-result" data-rating="<%= review.review_rating %>">
+              <!-- Rated: <%= review.review_rating %> stars -->
+            </p>
             <p class="card-text"> Review: <%= review.review_text %></p>
             <form action="/trails/<%= Trail.trail_id %>/reviews/<%= review.review_id%>/delete" method="post">
             <button class="btn btn-sm btn-danger" style="color: white;">Delete</button>
