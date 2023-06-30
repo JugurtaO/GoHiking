@@ -41,16 +41,20 @@ const bcryptjs_1 = __importDefault(require("bcryptjs"));
 const postSignout = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { user_email, user_password } = req.body;
     const user_id = req.session.active_user_id;
-    console.log(">>>>>>>>>>>>>> ", user_id);
-    if (!user_email.length || !user_password.length)
-        return res.send("credentials can not be blank!");
+    if (!user_email.length || !user_password.length) {
+        req.flash("danger", "credentials can not be blank!");
+        return res.redirect("/users/signout");
+    }
     const all_Users_With_Given_Email = yield myModels.User.findAll({ where: { user_email: user_email } });
     if (!all_Users_With_Given_Email || all_Users_With_Given_Email.length != 1) {
-        return res.send("Email or Password incorrect, try again !");
+        req.flash("danger", "Email or Password incorrect, try again !");
+        return res.redirect("/users/signout");
     }
     const safetoDelete = bcryptjs_1.default.compareSync(user_password, all_Users_With_Given_Email[0].dataValues.user_password);
-    if (!safetoDelete)
-        res.send("Email or Password incorrect, try again !");
+    if (!safetoDelete) {
+        req.flash("danger", "Email or Password incorrect, try again !");
+        return res.redirect("/users/signout");
+    }
     //now we can delelte safely all user activities before deleting it itself
     //delete user hikes and delete created user trails concurrently as we don't need to await them ( each one doesn't depend on the other)
     Promise.all([
@@ -64,7 +68,7 @@ const postSignout = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
         req.session.active_user_email = null;
         req.session.active_user_id = null;
         req.session.active_user_nickname = null;
-        // res.send("Successfuly signed  out. Good Bye")
+        req.flash("success", "Successfuly signed  out. Good Bye!");
         res.redirect("/users/signup");
     })
         .catch(err => {

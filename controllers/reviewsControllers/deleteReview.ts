@@ -8,15 +8,26 @@ export const deleteReview= async (req:Request,res:Response)=>{
     const allReviews=await myModels.Review.findAll({where:{review_id:review_id}});
     
    
-    if (!allReviews.length || allReviews.length!=1)
-        return res.send("no review found with given data");
+    if (!allReviews.length || allReviews.length!=1){
+        
+        req.flash("danger",`no review found with given data`);
+        return res.redirect(`/trails/${trail_id}`);
+        
     
-    if (allReviews[0].dataValues.author_id != req.session.active_user_id)
-    return res.status(401).send("not authorized to delete review !");
+    }
+    
+    
+    if (allReviews[0].dataValues.author_id != req.session.active_user_id){
+        
+        req.flash("danger",`not authorized to delete review !`);
+        return res.status(401).redirect(`/trails/${trail_id}`);
+        
+    
+    }
 
     const review=myModels.Review.destroy({where:{review_id:review_id}})
     .then(data=>{
-        // return res.send("OK.");
+        req.flash("success",`Successfuly deleted review.`);
         return res.redirect(`/trails/${trail_id}`)
     }).catch(err=>{
         return res.send("error set to"+err);

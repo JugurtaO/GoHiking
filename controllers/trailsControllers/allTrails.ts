@@ -9,8 +9,11 @@ export const allTrails = (req: Request, res: Response) => {
 
     Trails.then(allTrails => {
 
-        if (!allTrails.length)
-            return res.send("No trail was found, login and let's create one.")
+        if (!allTrails.length) {
+            req.flash("danger","No trail was found, login and let's create one.");
+            return res.redirect("/trails/new");
+        }
+        
 
         
         return res.render("trails", { allTrails });

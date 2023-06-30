@@ -41,12 +41,16 @@ const bcryptjs_1 = __importDefault(require("bcryptjs"));
 const postSignup = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     //get user credentials from request's body
     const { user_nickname, user_email, user_password } = req.body;
-    if (!user_nickname.length || !user_email.length || !user_password.length)
-        return res.send("credentials can not be blank!");
+    if (!user_nickname.length || !user_email.length || !user_password.length) {
+        req.flash("danger", "credentials can not be blank!");
+        return res.redirect("/users/signup");
+    }
     //checking wether user already exists
     const searchedUser = yield myModels.User.findAll({ where: { user_email: user_email } });
-    if (searchedUser && searchedUser.length == 1)
-        return res.send("Something went wrong. Please log in to proceed !.");
+    if (searchedUser && searchedUser.length == 1) {
+        req.flash("danger", "Something went wrong. Please log in to proceed !.");
+        return res.redirect("/users/signup");
+    }
     //generate a salt & hash the password
     const salt = bcryptjs_1.default.genSaltSync(12);
     const hash = bcryptjs_1.default.hashSync(user_password, salt);
@@ -56,7 +60,7 @@ const postSignup = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
         req.session.active_user_email = user_email;
         req.session.active_user_id = data.dataValues.user_id;
         req.session.active_user_nickname = data.dataValues.user_nickname;
-        // return res.send("OK.");
+        req.flash("success", "Successfuly signed in, welcome to JO-Hikes!");
         return res.redirect("/");
     }).catch(err => {
         return res.send("error payload set to" + err);

@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const dotenv_1 = __importDefault(require("dotenv"));
 const path_1 = __importDefault(require("path"));
+const connect_flash_1 = __importDefault(require("connect-flash"));
 //creating express app 
 const app = (0, express_1.default)();
 // Set up middlewars 
@@ -47,16 +48,15 @@ const sessionOption = {
     }
 };
 app.use((0, express_session_1.default)(sessionOption));
+app.use((0, connect_flash_1.default)());
 app.use((req, res, next) => {
-    // res.locals.success = req.flash("success");
-    // res.locals.danger = req.flash("danger");
+    res.locals.success = req.flash("success");
+    res.locals.danger = req.flash("danger");
     res.locals.active_user_email = req.session.active_user_email;
     res.locals.active_user_id = req.session.active_user_id;
     res.locals.active_user_nickname = req.session.active_user_nickname;
     // console.log("success >>",res.locals.success);
     // console.log("danger >>",res.locals.danger);
-    // console.log("user_email >>",res.locals.active_user_email);
-    // console.log("user_id  >>",res.locals.active_user_id);
     next();
 });
 //use routes 

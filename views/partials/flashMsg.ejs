@@ -1,0 +1,24 @@
+<% if(danger && danger.length){ %>
+    <p class="alert alert-danger   alert-alert-dismissible fade show position-fixed bottom-0 end-0 " role="alert">
+      <%= danger %>
+    </p>
+    <% } %>
+    
+    
+    <% if(success && success.length){ %>
+    <p class="alert alert-success alert-alert-dismissible fade show position-fixed bottom-0 end-0" role="alert">
+      <%= success %>
+    </p>
+    <% } %>
+    
+    
+    
+    
+    
+    
+    
+    <style>
+      .alert {
+        z-index: 1100;
+      }
+    </style>

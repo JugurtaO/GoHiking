@@ -8,8 +8,11 @@ export const userTrails = (req: Request, res: Response) => {
 
     const Trails = myModels.Trail.findAll({ where: { author_id: user_id } });
     Trails.then(allTrails => {
-        if (!allTrails.length)
-            return res.send("No trail was found, login and let's create one.")
+        if (!allTrails.length){
+        req.flash("danger",`No trail was found, create your first one.`);
+        return res.redirect("/trails/new");
+        
+        }
 
 
 

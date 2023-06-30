@@ -8,8 +8,12 @@ export const viewTrail = (req: Request, res: Response) => {
     const trail = myModels.Trail.findOne({ where: { trail_id: trail_id } });
 
     trail.then(Trail => {
-        if (Trail === null)
-            return res.send("No trail was found, login and let's create one.")
+        if (Trail === null){
+            req.flash("danger",`No trail was found !`);
+            return res.redirect("/trails");
+            
+        }
+       
 
         
             

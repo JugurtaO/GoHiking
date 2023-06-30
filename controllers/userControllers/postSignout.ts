@@ -6,22 +6,32 @@ export const postSignout= async (req:Request,res:Response)=>{
 
     const { user_email, user_password } = req.body;
     const user_id = req.session.active_user_id;
-    console.log(">>>>>>>>>>>>>> ",user_id)
+
 
     if(!user_email.length ||!user_password.length)
-        return res.send("credentials can not be blank!")
+    {
+        req.flash("danger","credentials can not be blank!");
+        return res.redirect("/users/signout");
+    }
+        
     
     const all_Users_With_Given_Email= await myModels.User.findAll({where:{user_email:user_email}});
 
     if (!all_Users_With_Given_Email || all_Users_With_Given_Email.length != 1) {
-        return res.send("Email or Password incorrect, try again !");
+        req.flash("danger","Email or Password incorrect, try again !");
+        return res.redirect("/users/signout");
        
     }
 
     const safetoDelete:boolean = bcrypt.compareSync(user_password, all_Users_With_Given_Email[0].dataValues.user_password);
 
-    if (!safetoDelete) 
-        res.send("Email or Password incorrect, try again !");
+    if (!safetoDelete)
+    {
+        req.flash("danger","Email or Password incorrect, try again !");
+        return res.redirect("/users/signout");
+       
+    } 
+       
      
    
 
@@ -46,7 +56,8 @@ export const postSignout= async (req:Request,res:Response)=>{
         req.session.active_user_nickname=null;
     
     
-        // res.send("Successfuly signed  out. Good Bye")
+        
+        req.flash("success","Successfuly signed  out. Good Bye!");
         res.redirect("/users/signup");
 
     })

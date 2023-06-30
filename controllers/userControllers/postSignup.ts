@@ -10,14 +10,22 @@ export const postSignup = async (req: Request, res: Response) => {
     const { user_nickname, user_email, user_password }: { user_nickname: string, user_email: String, user_password: string } = req.body;
 
     if (!user_nickname.length || !user_email.length || !user_password.length)
-        return res.send("credentials can not be blank!")
+    {
+        req.flash("danger","credentials can not be blank!");
+        return res.redirect("/users/signup");
+    }
+      
 
 
     //checking wether user already exists
     const searchedUser = await myModels.User.findAll({ where: { user_email: user_email } });
 
     if (searchedUser && searchedUser.length == 1)
-        return res.send("Something went wrong. Please log in to proceed !.");
+    {
+        req.flash("danger","Something went wrong. Please log in to proceed !.");
+        return res.redirect("/users/signup");
+    }
+
 
 
 
@@ -36,7 +44,8 @@ export const postSignup = async (req: Request, res: Response) => {
         req.session.active_user_nickname = data.dataValues.user_nickname;
 
 
-        // return res.send("OK.");
+
+        req.flash("success","Successfuly signed in, welcome to JO-Hikes!");
         return res.redirect("/");
 
 

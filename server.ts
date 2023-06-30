@@ -4,6 +4,7 @@ import { Request, Response } from "express";
 import express from "express";
 import dotenv from "dotenv";
 import path from "path";
+import flash from "connect-flash";
 
 //creating express app 
 const app = express();
@@ -70,14 +71,14 @@ const sessionOption = {
 };
 
 app.use(sessions(sessionOption));
-
+app.use(flash());
 
 
 
 
 app.use((req:Request, res:Response, next:Function) => {
-    // res.locals.success = req.flash("success");
-    // res.locals.danger = req.flash("danger");
+    res.locals.success = req.flash("success");
+    res.locals.danger = req.flash("danger");
     res.locals.active_user_email = req.session.active_user_email;
     res.locals.active_user_id = req.session.active_user_id;
     res.locals.active_user_nickname=req.session.active_user_nickname;
@@ -85,8 +86,6 @@ app.use((req:Request, res:Response, next:Function) => {
     // console.log("success >>",res.locals.success);
     // console.log("danger >>",res.locals.danger);
     
-    // console.log("user_email >>",res.locals.active_user_email);
-    // console.log("user_id  >>",res.locals.active_user_id);
     next()
 })
 

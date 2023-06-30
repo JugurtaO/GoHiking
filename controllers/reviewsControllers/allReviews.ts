@@ -10,8 +10,14 @@ export const allReviews = (req: Request, res: Response) => {
 
     Reviews.then(allReviews => {
 
-        if (!allReviews.length)
-            return res.send("No review was found, login and let's create one.")
+        if (!allReviews.length){
+        
+            req.flash("danger",`No review was found, login and let's create one.`);
+            return res.redirect(`/trails/${trail_id}/reviews`);
+            
+        
+        }
+        
 
 
         return res.json(allReviews );

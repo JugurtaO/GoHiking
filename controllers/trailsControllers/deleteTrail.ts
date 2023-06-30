@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import * as myModels from "../../models/index";
 
+
 export const deleteTrail =  (req: Request, res: Response) => {
 
     const { trail_id } = req.params;
@@ -13,7 +14,10 @@ export const deleteTrail =  (req: Request, res: Response) => {
 
     ]).then(data=>{
         myModels.Trail.destroy({ where: { trail_id: trail_id } });
+        req.flash("success",`Successfuly deleted trail`);
         return res.redirect("/trails");
+        
+          
 
     }).catch(err=>{
         return res.send("error payload set to "+ err);
