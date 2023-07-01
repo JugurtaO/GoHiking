@@ -31,9 +31,36 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.addTrail = void 0;
+exports.addTrail = exports.getLngLat = void 0;
 const myModels = __importStar(require("../../models/index"));
+const axios_1 = __importDefault(require("axios"));
+function getLngLat(location) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const apiKey = String(process.env.TOMTOM_API_KEY); // Replace with your TomTom API key
+        const url = `https://api.tomtom.com/search/2/geocode/${encodeURIComponent(location)}.json`;
+        try {
+            const response = yield axios_1.default.get(url, {
+                params: {
+                    key: apiKey,
+                },
+            });
+            const data = response.data;
+            if (response.status === 200 && data.results && data.results.length > 0) {
+                const { lat, lon } = data.results[0].position;
+                return [lon, lat];
+            }
+        }
+        catch (error) {
+            console.error('Failed to retrieve lnglat:', error);
+        }
+        return null;
+    });
+}
+exports.getLngLat = getLngLat;
 const addTrail = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { trail_name, trail_location, difficulty_level, trail_image } = req.body;
     const author_id = req.session.active_user_id;
@@ -47,10 +74,13 @@ const addTrail = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         req.flash("danger", "Trail with given name already exists! ");
         return res.redirect("/trails/new");
     }
+    const [longitude, latitude] = yield getLngLat(String(trail_location));
+    console.log([longitude, latitude]);
     // now we can create new trail 
     //no need to await the operation the user cannot see the effect behind the scenes
-    const newTrail = myModels.Trail.create({ trail_name: trail_name, trail_location: trail_location, difficulty_level: difficulty_level, trail_image: trail_image, author_id: author_id })
+    const newTrail = myModels.Trail.create({ trail_name: trail_name, trail_location: trail_location, difficulty_level: difficulty_level, trail_image: trail_image, author_id: author_id, trail_longitude: longitude, trail_latitude: latitude })
         .then(data => {
+        // console.log([longitude,latitude]);
         req.flash("success", "Successfuly created trail.");
         return res.redirect(`/trails/${data.dataValues.trail_id}`);
     }).catch(err => {

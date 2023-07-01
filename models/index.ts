@@ -88,6 +88,14 @@ export const Trail = db_handler.define("Trail", {
         type: DataTypes.INTEGER,
         allowNull:false
     },
+    trail_longitude: {
+        type: DataTypes.FLOAT,
+        allowNull: false
+    },
+    trail_latitude: {
+        type: DataTypes.FLOAT,
+        allowNull: false
+    },
 },
     {
         tableName: "Trails",
@@ -120,6 +128,7 @@ export const Trail = db_handler.define("Trail", {
             type: DataTypes.INTEGER,
             allowNull:false
         },
+        
     },
         {
             tableName: "Reviews",

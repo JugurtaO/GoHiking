@@ -1,11 +1,11 @@
 CREATE DATABASE IF NOT EXISTS JOhikes;
 USE JOhikes;
 
-DROP TABLE Hikes;
-DROP TABLE Trails;
-DROP TABLE Reviews;
-DROP TABLE Difficulties;
-DROP TABLE Users;
+DROP TABLE IF EXISTS Hikes;
+DROP TABLE IF EXISTS Trails;
+DROP TABLE IF EXISTS Reviews;
+DROP TABLE IF EXISTS Difficulties;
+DROP TABLE IF EXISTS Users;
 
 CREATE TABLE IF NOT EXISTS  Users (
    user_id INT PRIMARY KEY AUTO_INCREMENT,
@@ -41,6 +41,8 @@ CREATE TABLE IF NOT EXISTS Trails (
    difficulty_level VARCHAR (128) NOT NULL,
    trail_image VARCHAR (1024) NOT NULL,
    author_id INT NOT NULL,
+   trail_longitude FLOAT  NOT NULL DEFAULT 0,
+   trail_latitude FLOAT  NOT NULL DEFAULT 0,
 
    CONSTRAINT TrailKEY1 FOREIGN KEY (author_id) REFERENCES Users(user_id),
    CONSTRAINT Trails_key FOREIGN KEY (difficulty_level) REFERENCES Difficulties(difficulty_level)

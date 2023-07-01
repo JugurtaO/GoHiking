@@ -75,6 +75,14 @@ exports.Trail = config_1.db_handler.define("Trail", {
         type: sequelize_1.DataTypes.INTEGER,
         allowNull: false
     },
+    trail_longitude: {
+        type: sequelize_1.DataTypes.FLOAT,
+        allowNull: false
+    },
+    trail_latitude: {
+        type: sequelize_1.DataTypes.FLOAT,
+        allowNull: false
+    },
 }, {
     tableName: "Trails",
     timestamps: false
