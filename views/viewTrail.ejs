@@ -16,14 +16,15 @@
       type="text/css"
       href="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.18.0/maps/maps.css"
     />
+
     <script src="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.18.0/maps/maps-web.min.js"></script>
-  </head>
-  <body class="text-center"">
+    </head>
+    <body class="text-center"">
     <%- include('./partials/navbar') %>
   <%- include('./partials/flashMsg.ejs') %>
     
-  <div id="map" style="width:100% ; height:100%;"></div>
   <main class="container mt-5">
+    <div id="map" style="width:500px ; height:250px;"></div>
     <div class="row">
       <div class="col-6">
         <div class="card mb-5">
@@ -34,7 +35,7 @@
           </div>
           <ul class="list-group list-group-flush">
             <li class="list-group-item text-muted"><%= Trail.trail_location %></li>
-
+            
           </ul>
           <div class="card-body">
             <form class="d-inline" action="/trails/<%=Trail.trail_id%>/delete" method="post">
@@ -79,7 +80,7 @@
               <textarea class="form-control" name="review_text" id="review_text" cols="60" rows="3" placeholder="Tell us more about this trail!" autofocus></textarea>
             </div>
             <button class="btn btn-outline-success btn-lg mt-5 ">Post</button>
-
+            
           </form>
 
         </div>
@@ -88,41 +89,52 @@
     </div>
     
 
-
+    
     <% allReviews.forEach(review => { %>
-    <div class="card mb-3">
-      <div class=" card-body">
-        <h6 class="card-subtitle mb-2 text-muted"> <%= review.User.user_nickname %></h6>
-        <p class="starability-result" data-rating="<%= review.review_rating %>">
-           <%= review.review_rating %> stars
-        </p>
-        <p class="card-text"> <%= review.review_text %></p>
+      <div class="card mb-3">
+        <div class=" card-body">
+          <h6 class="card-subtitle mb-2 text-muted"> <%= review.User.user_nickname %></h6>
+          <p class="starability-result" data-rating="<%= review.review_rating %>">
+            <%= review.review_rating %> stars
+            </p>
+            <p class="card-text"> <%= review.review_text %></p>
         <form action="/trails/<%= Trail.trail_id %>/reviews/<%= review.review_id%>/delete" method="post">
           <button class="btn btn-sm btn-danger" style="color: white;">Delete</button>
-        </form>
+          </form>
       </div>
     </div>
 
-
+    
     <% }) %>
     </div>
     </div>
   </main>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
    
-    <script>
-        let center=[4,4.44];
-      var map = tt.map({
-        key: "Uf8Gn8lbzqxjq993tBHU1L3u9lGdglcb",
-        container: "map",
-        center:center,
-        zoom:10
-      })
+  <script> 
+  const API_KEY= '<%- process.env.TOMTOM_API_KEY%>';
+  const longitude='<%-Trail.trail_longitude%>';
+  const latitude ='<%-Trail.trail_latitude%>';
 
-      map.on('load',()=>{
-        new tt.Marker().setLngLat(center).addTo(map);
+  </script>
+  <script >
+    const center = [longitude,latitude];
+    let map = tt.map({
+      key: API_KEY,
+    container: "map",
+    center: center,
+    zoom: 10
+  })
 
-      })
-    </script>
+map.on('load', () => {
+    new tt.Marker().setLngLat(center).addTo(map);
+
+}) ;
+map.addControl(new tt.FullscreenControl());
+map.addControl(new tt.NavigationControl());
+
+
+</script>
+
   </body>
 </html>

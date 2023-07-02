@@ -16,6 +16,7 @@ export const allTrails = (req: Request, res: Response) => {
         
 
         
+      
         return res.render("trails", { allTrails });
 
     }).catch(err => {
