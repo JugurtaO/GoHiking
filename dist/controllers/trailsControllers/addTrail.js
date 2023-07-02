@@ -68,6 +68,10 @@ const addTrail = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         req.flash("danger", "Trail characteristics cannot be blank!");
         return res.redirect("/trails/new");
     }
+    if (difficulty_level != "easy" && difficulty_level != "medium" && difficulty_level != "hard") {
+        req.flash("danger", "The difficulty level can only be easy, medium or hard!");
+        return res.redirect("/trails/new");
+    }
     //check wether the wanted trail doesn't not already exist -- if not create new trail 
     const existedTrails = yield myModels.Trail.findAll({ where: { trail_name: trail_name } });
     if (existedTrails.length) {
