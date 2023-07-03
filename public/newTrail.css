@@ -1,0 +1,64 @@
+
+/* Cluster Map Styles */
+
+.map-box:hover>.map-box__map {
+    width: 85%;
+    height: 90%;
+    background-color: cadetblue;
+}
+
+.map-box:hover {
+    width: 25rem;
+    height: 20rem;
+    z-index: 1000;
+    position: absolute;
+}
+
+.map-box {
+    position: absolute;
+    top: 25%;
+    right: 0%;
+    height: 5rem;
+    width: 5rem;
+    border-radius: 4rem;
+    background-color: cadetblue;
+    padding: 1rem;
+    margin-top: 1rem;
+    margin-right: 1rem;
+    z-index: 1000;
+    margin-bottom: 4rem;
+    cursor: pointer;
+}
+
+.map-box__map {
+    border: none;
+    background: none;
+    outline: none;
+    padding: 0;
+    color: white;
+    float: left;
+    width: 0;
+    transition: 0.5s;
+    text-decoration: white;
+    border-radius: 10%;
+}
+
+#map-box__toggler {
+    border: none;
+    background: none;
+    outline: none;
+    float: right;
+    height: 2.5rem;
+    width: 2.5rem;
+    border-radius: 50%;
+    display: flex;
+    color: white;
+    justify-content: center;
+    align-items: center;
+    margin-right: 0.3rem;
+    margin-left: 0.3rem;
+    z-index: 1000;
+    cursor: pointer;
+}
+
+
