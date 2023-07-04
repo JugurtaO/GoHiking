@@ -60,7 +60,7 @@ export const addTrail = async (req: Request, res: Response) => {
     
      const [longitude,latitude]= await getLngLat(String(trail_location));
 
-     console.log([longitude,latitude]);
+    
      
      
     // now we can create new trail 
