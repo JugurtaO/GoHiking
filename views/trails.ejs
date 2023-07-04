@@ -16,49 +16,23 @@
 </head>
 
 <body>
+    
   
-  <div class="hero-image" id="first">
+    <div class="hero-image" id="first">
+        <%- include('./partials/navbar.ejs') %>
 
     <div class="hero-text">
-        <h1 class="hero-text__header">Gohiking</h1>
+        <h1 class="hero-text__header">GOhiking</h1>
         <h4 class="hero-text__attach">Find trails that fit your nature for free!</h4>
     </div>  
 </div>
-<nav class="navbar">
-    <div class="navbar-nav">
-        <ul class="nav-item">
-
-            <li class="nav-link"><a href="/home"><i class="mx-4 fas fa-home"></i></a> </li>
-            <li class="nav-link"> <a href="/campgrounds"><i class="mx-4 fas fa-campground"></i></a></li>
-            <li class="nav-link"> <a href="/campgrounds/new"><i class="mx-4 fas fa-map-marked-alt"></i></a></li>
-            <% if(!active_user_email){ %>
-                <li class="nav-link"> <a href="/login"><i class="mx-4 fas fa-user-check"></i></a></li>
-                <li class="nav-link"> <a href="/Signup"><i class="mx-4 fas fa-user-plus"></i></a></li>
-                <% }else{ %>
-                    <li class="nav-link"><a href="/Logout"><i class="mx-4 fas fa-sign-out-alt"></i></a></li>
-                    <li class="nav-link"> <a href="/Signout"><i class="mx-4 fas fa-user-minus"></i></a></li>
-                    <% } %>
-                        <li class="nav-link">
-                            <a href="#first"> <i class="mx-4 fas fa-arrow-up"></i></a>
-                        </li>
-
-
-        </ul>
-    </div>
-</nav>
 
 
 
 <div class="mx-5 flashMsg">
     <%- include('./partials/flashMsg.ejs') %>
 </div>
-<div class="search-box">
-    <form class="search-section" action="/campgrounds/search" method="POST">
-        <input type="text" placeholder="Search By Place" name="searchedInput" id="search-section__input"
-            autofocus>
-        <i id="search-section__icon" class="fas fa-search "></i>
-    </form>
-</div>
+
 <div class="map-box my-5">
     <i id="map-box__toggler" class="fas fa-map-marker-alt "></i>
     <div class="map-box__map" id='map'></div>
@@ -66,30 +40,53 @@
 <div class="scrollDown-box my-5">
     <a href="#last"><i id="scrollDown-box__scroller" class="fas fa-arrow-down"></i></a>
 </div>
-<main>
-    <div class="row">
-        <% for(let trail of allTrails) {%>
-            <a class="col-xs-6 col-lg-4" href="/trails/<%=trail.trail_id %>">
-                <div class="card shadow-lg p-4  mb-5 bg-body rounded">
-                    <img src=" <%= trail.trail_image %>  "
-                        class="card-img-top img-thumbnail img-fluid">
-                    <div class="card-body">
-                        <h5 class="card-title">
-                            <%=trail.trail_name %>
-                        </h5>
-                        <p class="card-text text-muted">
-                            <%= trail.trail_location %>
-                        </p>
-                        <button type="button" class="btn btn-outline-success btn-md">
-                            <%= trail.trail_name %>
-                        </button>
-                    </div>
-                </div>
-            </a>
+<div class="row row-cols-1 row-cols-md-3 mt-5">
+   
 
-            <% } %>
+    <% allTrails.forEach(trail => { %>
+     
+   
+    <div class="col mb-4">
+      <!-- Card -->
+      <div class="card h-80 w-100">
+  
+        <!--Card image-->
+        <div class="view overlay">
+          <img class="card-img-top" src=<%= trail.trail_image %>
+            alt="Card image cap">
+          <a href="#!">
+            <div class="mask rgba-white-slight"></div>
+          </a>
+        </div>
+  
+        <!--Card content-->
+        <div class="card-body">
+          <a class="col-xs-6 col-lg-4" href="/trails/<%=trail.trail_id %>">
+          <!--Title-->
+          <h4 class="card-title"><%= trail.trail_name %></h4>
+          <!--Text-->
+          <p class="card-text text-muted">
+            <%= trail.trail_location %>
+        </p>
+          <!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
+          <button type="button" class="btn btn-outline-success btn-md" >View <%= trail.trail_name %>
+        </button>
+      </a>
+        </div>
+  
+      </div>
+      <!-- Card -->
     </div>
-</main>
+    
+    <% }) %>
+ 
+  </div>
+
+
+
+
+
+
 <div id="last"></div>
 <div class="bottumPage">
     <a href="/home"><i class="mx-4 fas fa-home"></i></a>
