@@ -1,5 +1,6 @@
 //requiring some stuff for our app
-import { Request, Response } from "express";
+import { NextFunction, Request, Response} from "express";
+import expressError from "./utils/expressError";
 
 import express from "express";
 import dotenv from "dotenv";
@@ -93,6 +94,16 @@ app.use((req:Request, res:Response, next:Function) => {
 //use routes 
 import Router from "./routes/index";
 app.use(Router);
+
+//errors handling middlwares 
+app.all('*',(req:Request,res:Response,next:NextFunction)=>{
+    next(new expressError("Page Not Found",404));
+})
+
+app.use((err:expressError,req:Request,res:Response,next:NextFunction) =>{
+    const {statusCode=500,message='Something went wrong'}=err;
+    res.status(statusCode).send("oh booy");
+});
 
 //make our app listen on port 3000
 const PORT = process.env.PORT || 3000;

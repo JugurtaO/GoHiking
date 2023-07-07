@@ -37,6 +37,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.addTrail = exports.getLngLat = void 0;
 const myModels = __importStar(require("../../models/index"));
+const catchAsync_1 = __importDefault(require("../../utils/catchAsync"));
 const axios_1 = __importDefault(require("axios"));
 function getLngLat(location) {
     return __awaiter(this, void 0, void 0, function* () {
@@ -61,7 +62,7 @@ function getLngLat(location) {
     });
 }
 exports.getLngLat = getLngLat;
-const addTrail = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.addTrail = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { trail_name, trail_location, difficulty_level, trail_image } = req.body;
     const author_id = req.session.active_user_id;
     if (!trail_name.length || !trail_location.length || !difficulty_level.length || !trail_image.length) {
@@ -89,5 +90,4 @@ const addTrail = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     }).catch(err => {
         res.send("error set to " + err);
     });
-});
-exports.addTrail = addTrail;
+}));

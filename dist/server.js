@@ -3,6 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const expressError_1 = __importDefault(require("./utils/expressError"));
 const express_1 = __importDefault(require("express"));
 const dotenv_1 = __importDefault(require("dotenv"));
 const path_1 = __importDefault(require("path"));
@@ -62,6 +63,14 @@ app.use((req, res, next) => {
 //use routes 
 const index_1 = __importDefault(require("./routes/index"));
 app.use(index_1.default);
+//errors handling middlwares 
+app.all('*', (req, res, next) => {
+    next(new expressError_1.default("Page Not Found", 404));
+});
+app.use((err, req, res, next) => {
+    const { statusCode = 500, message = 'Something went wrong' } = err;
+    res.status(statusCode).send("oh booy");
+});
 //make our app listen on port 3000
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {

@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import * as myModels from "../../models/index";
+import catchAsync from '../../utils/catchAsync';
 
 import axios from 'axios';
 
@@ -27,7 +28,7 @@ export async function getLngLat(location: string): Promise<[number, number] | nu
   }
   
 
-export const addTrail = async (req: Request, res: Response) => {
+export const addTrail = catchAsync(async (req: Request, res: Response) => {
 
 
     const { trail_name, trail_location, difficulty_level, trail_image }: { trail_name: String, trail_location: String, difficulty_level: String, trail_image: String } = req.body;
@@ -86,5 +87,5 @@ export const addTrail = async (req: Request, res: Response) => {
 
 
 
-};
+});
 

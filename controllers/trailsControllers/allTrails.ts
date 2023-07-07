@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import * as myModels from "../../models/index";
 
+
 export const allTrails = (req: Request, res: Response) => {
 
 
