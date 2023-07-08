@@ -1,8 +1,8 @@
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import * as myModels from "../../models/index";
-import catchAsync from '../../utils/catchAsync';
-
 import axios from 'axios';
+import expressError from "../../utils/expressError";
+import { error } from "console";
 
 export async function getLngLat(location: string): Promise<[number, number] | null> {
     const apiKey = String(process.env.TOMTOM_API_KEY); // Replace with your TomTom API key
@@ -28,7 +28,7 @@ export async function getLngLat(location: string): Promise<[number, number] | nu
   }
   
 
-export const addTrail = catchAsync(async (req: Request, res: Response) => {
+export const addTrail = async (req: Request, res: Response,next:NextFunction) => {
 
 
     const { trail_name, trail_location, difficulty_level, trail_image }: { trail_name: String, trail_location: String, difficulty_level: String, trail_image: String } = req.body;
@@ -45,6 +45,7 @@ export const addTrail = catchAsync(async (req: Request, res: Response) => {
     if(difficulty_level !="easy" &&  difficulty_level!="medium" && difficulty_level!="hard" ){
       req.flash("danger", "The difficulty level can only be easy, medium or hard!");
       return res.redirect("/trails/new");
+      // throw new expressError("difficulty level should be only easy, medium or hard !",500);
 
     }
 
@@ -67,14 +68,12 @@ export const addTrail = catchAsync(async (req: Request, res: Response) => {
     //no need to await the operation the user cannot see the effect behind the scenes
     const newTrail = myModels.Trail.create({ trail_name: trail_name, trail_location: trail_location, difficulty_level: difficulty_level, trail_image: trail_image, author_id: author_id,trail_longitude:longitude,trail_latitude:latitude })
         .then(data => {
-           
-            // console.log([longitude,latitude]);
-
+          
             req.flash("success", "Successfuly created trail.");
             return res.redirect(`/trails/${data.dataValues.trail_id}`);
 
         }).catch(err => {
-            res.send("error set to " + err);
+           return  next(err);
         });
 
 
@@ -87,5 +86,5 @@ export const addTrail = catchAsync(async (req: Request, res: Response) => {
 
 
 
-});
+};
 

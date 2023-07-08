@@ -37,7 +37,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.addTrail = exports.getLngLat = void 0;
 const myModels = __importStar(require("../../models/index"));
-const catchAsync_1 = __importDefault(require("../../utils/catchAsync"));
 const axios_1 = __importDefault(require("axios"));
 function getLngLat(location) {
     return __awaiter(this, void 0, void 0, function* () {
@@ -62,7 +61,7 @@ function getLngLat(location) {
     });
 }
 exports.getLngLat = getLngLat;
-exports.addTrail = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const addTrail = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const { trail_name, trail_location, difficulty_level, trail_image } = req.body;
     const author_id = req.session.active_user_id;
     if (!trail_name.length || !trail_location.length || !difficulty_level.length || !trail_image.length) {
@@ -72,6 +71,7 @@ exports.addTrail = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, voi
     if (difficulty_level != "easy" && difficulty_level != "medium" && difficulty_level != "hard") {
         req.flash("danger", "The difficulty level can only be easy, medium or hard!");
         return res.redirect("/trails/new");
+        // throw new expressError("difficulty level should be only easy, medium or hard !",500);
     }
     //check wether the wanted trail doesn't not already exist -- if not create new trail 
     const existedTrails = yield myModels.Trail.findAll({ where: { trail_name: trail_name } });
@@ -84,10 +84,10 @@ exports.addTrail = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, voi
     //no need to await the operation the user cannot see the effect behind the scenes
     const newTrail = myModels.Trail.create({ trail_name: trail_name, trail_location: trail_location, difficulty_level: difficulty_level, trail_image: trail_image, author_id: author_id, trail_longitude: longitude, trail_latitude: latitude })
         .then(data => {
-        // console.log([longitude,latitude]);
         req.flash("success", "Successfuly created trail.");
         return res.redirect(`/trails/${data.dataValues.trail_id}`);
     }).catch(err => {
-        res.send("error set to " + err);
+        return next(err);
     });
-}));
+});
+exports.addTrail = addTrail;

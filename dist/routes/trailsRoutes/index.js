@@ -33,14 +33,15 @@ const sanitize_1 = require("../../middlewares/sanitization/sanitize");
 const checkLogin_1 = require("../../middlewares/auth/checkLogin");
 const checkAuthorization_1 = require("../../middlewares/auth/checkAuthorization");
 const checkAuthorization_2 = require("../../middlewares/auth/checkAuthorization");
+const catchAsync_1 = require("../../utils/catchAsync");
 const trailRouter = express_1.default.Router();
 trailRouter.get("/", checkLogin_1.checkLogin, trailControllers.allTrails);
 trailRouter.get("/new", trailControllers.renderCreateTrail);
 trailRouter.get("/:trail_id", sanitize_1.sanitize, checkLogin_1.checkLogin, trailControllers.viewTrail);
 trailRouter.get("/:trail_id/reviews", sanitize_1.sanitize, checkLogin_1.checkLogin, reviewControllers.allReviews);
-trailRouter.post("/add", sanitize_1.sanitize, checkLogin_1.checkLogin, trailControllers.addTrail);
+trailRouter.post("/add", sanitize_1.sanitize, checkLogin_1.checkLogin, (0, catchAsync_1.catchAsync)(trailControllers.addTrail)); ///
 trailRouter.post("/:trail_id/delete", sanitize_1.sanitize, checkLogin_1.checkLogin, checkAuthorization_1.checkAuthorizationForTrail, trailControllers.deleteTrail);
-trailRouter.post("/:trail_id/reviews/add", sanitize_1.sanitize, reviewControllers.addReview);
+trailRouter.post("/:trail_id/reviews/add", sanitize_1.sanitize, checkLogin_1.checkLogin, reviewControllers.addReview);
 trailRouter.post("/:trail_id/reviews/:review_id/edit", sanitize_1.sanitize, checkLogin_1.checkLogin, checkAuthorization_2.checkAuthorizationForReview, reviewControllers.editReview);
 trailRouter.post("/:trail_id/reviews/:review_id/delete", sanitize_1.sanitize, checkLogin_1.checkLogin, checkAuthorization_2.checkAuthorizationForReview, reviewControllers.deleteReview);
 exports.default = trailRouter;

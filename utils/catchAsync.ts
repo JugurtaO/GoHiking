@@ -1,10 +1,26 @@
 import { Request, Response, NextFunction } from 'express';
 
-const func = (func: (req: Request, res: Response, next: NextFunction) => Promise<any>) => {
-  console.log("je suis dans le middlware catchAsync!!!!");
-  return (req: Request, res: Response, next: NextFunction) => {
-    func(req, res, next).catch(next);
+// export const  catchAsync= (fn:Function) =>{
+  
+//      return function (req:Request,res:Response,next:NextFunction){
+//     fn(req,res,next).catch((err:Error)=>next(err));
+//   }
+
+// }
+
+
+export const catchAsync = (fn: (req: Request, res:Response, next: NextFunction) => Promise<any>) => {
+  return function(req: Request, res: Response, next: NextFunction) {
+      fn(req, res, next).catch((e: Error) => {
+          return next(e);
+      });
   };
 };
 
-export default func;
+
+
+
+
+
+
+

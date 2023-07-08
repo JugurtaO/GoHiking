@@ -5,7 +5,7 @@ import bcrypt from "bcryptjs";
 
 
 
-export const postLogin = async (req: Request, res: Response) => {
+export const postLogin =  async (req: Request, res: Response) => {
 
     if (req.session.active_user_email){
         req.flash("danger","Already logged in .");

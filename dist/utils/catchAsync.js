@@ -1,9 +1,16 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const func = (func) => {
-    console.log("je suis dans le middlware catchAsync!!!!");
-    return (req, res, next) => {
-        func(req, res, next).catch(next);
+exports.catchAsync = void 0;
+// export const  catchAsync= (fn:Function) =>{
+//      return function (req:Request,res:Response,next:NextFunction){
+//     fn(req,res,next).catch((err:Error)=>next(err));
+//   }
+// }
+const catchAsync = (fn) => {
+    return function (req, res, next) {
+        fn(req, res, next).catch((e) => {
+            return next(e);
+        });
     };
 };
-exports.default = func;
+exports.catchAsync = catchAsync;

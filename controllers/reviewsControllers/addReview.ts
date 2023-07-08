@@ -1,4 +1,4 @@
-import { Request,Response } from "express";
+import { NextFunction, Request,Response } from "express";
 import * as myModels from "../../models/index";
 
 export const addReview= (req:Request,res:Response)=>{
