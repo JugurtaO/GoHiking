@@ -34,7 +34,7 @@ const viewTrail = (req, res) => {
             return res.redirect("/trails");
         }
         // load all trail reviews & their author| no need to await the operation
-        const Reviews = myModels.Review.findAll({ include: { model: myModels.User }, where: { trail_id: trail_id }, limit: 5 });
+        const Reviews = myModels.Review.findAll({ include: { model: myModels.User }, where: { trail_id: trail_id }, limit: 20 });
         Reviews.then(allReviews => {
             return res.render("viewTrail", { Trail, allReviews });
         });

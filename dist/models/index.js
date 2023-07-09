@@ -95,7 +95,7 @@ exports.Review = config_1.db_handler.define("Review", {
         primaryKey: true
     },
     review_text: {
-        type: sequelize_1.DataTypes.STRING(256),
+        type: sequelize_1.DataTypes.STRING(16000),
         allowNull: false
     },
     review_rating: {

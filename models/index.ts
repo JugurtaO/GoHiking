@@ -112,7 +112,7 @@ export const Trail = db_handler.define("Trail", {
             primaryKey: true
         },
         review_text: {
-            type: DataTypes.STRING(256),
+            type: DataTypes.STRING(16000),
             allowNull: false
         },
         review_rating:{

@@ -18,7 +18,7 @@ export const viewTrail = (req: Request, res: Response) => {
         
             
         // load all trail reviews & their author| no need to await the operation
-        const Reviews = myModels.Review.findAll({include:{model:myModels.User},where: { trail_id: trail_id }, limit: 5 });
+        const Reviews = myModels.Review.findAll({include:{model:myModels.User},where: { trail_id: trail_id }, limit: 20 });
 
 
         Reviews.then(allReviews => {
