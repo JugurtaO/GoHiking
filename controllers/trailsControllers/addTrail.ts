@@ -73,7 +73,7 @@ export const addTrail = async (req: Request, res: Response,next:NextFunction) =>
             return res.redirect(`/trails/${data.dataValues.trail_id}`);
 
         }).catch(err => {
-           return  next(err);
+           return next(err);
         });
 
 
