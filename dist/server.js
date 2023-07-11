@@ -65,7 +65,7 @@ const index_1 = __importDefault(require("./routes/index"));
 app.use(index_1.default);
 //errors handling middlwares 
 app.all('*', (req, res, next) => {
-    next(new expressError_1.default("Page Not Found", 404));
+    next(new expressError_1.default("Not Found", 404));
 });
 app.use((err, req, res, next) => {
     const { statusCode = 500, message = 'Something went wrong' } = err;

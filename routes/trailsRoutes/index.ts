@@ -20,7 +20,7 @@ trailRouter.get("/:trail_id/reviews",sanitize,checkLogin,reviewControllers.allRe
 trailRouter.post("/add",sanitize,checkLogin, catchAsync( trailControllers.addTrail)); 
 trailRouter.post("/:trail_id/delete",sanitize,checkLogin,checkAuthorizationForTrail,trailControllers.deleteTrail);
 
-trailRouter.post("/:trail_id/reviews/add",sanitize,reviewControllers.addReview);
+trailRouter.post("/:trail_id/reviews/add",reviewControllers.addReview);
 trailRouter.post("/:trail_id/reviews/:review_id/edit",sanitize,checkLogin,checkAuthorizationForReview,reviewControllers.editReview);
 trailRouter.post("/:trail_id/reviews/:review_id/delete",sanitize,checkLogin,checkAuthorizationForReview,reviewControllers.deleteReview);
 

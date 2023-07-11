@@ -97,7 +97,7 @@ app.use(Router);
 
 //errors handling middlwares 
 app.all('*',(req:Request,res:Response,next:NextFunction)=>{
-    next(new expressError("Page Not Found",404));
+    next(new expressError("Not Found",404));
 })
 
 app.use((err:expressError,req:Request,res:Response,next:NextFunction) =>{
