@@ -1,8 +1,8 @@
-import { Request,Response } from "express";
+import { NextFunction, Request,Response } from "express";
 import * as myModels from "../../models/index";
 import bcrypt from "bcryptjs";
 
-export const postSignout= async (req:Request,res:Response)=>{
+export const postSignout= async (req:Request,res:Response,next:NextFunction)=>{
 
     const { user_email, user_password } = req.body;
     const user_id = req.session.active_user_id;
@@ -62,7 +62,7 @@ export const postSignout= async (req:Request,res:Response)=>{
 
     })
     .catch(err=>{
-        return res.send("error payload set to"+ err);
+        return next(err);
     })
 
 

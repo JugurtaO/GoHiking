@@ -38,7 +38,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.postSignout = void 0;
 const myModels = __importStar(require("../../models/index"));
 const bcryptjs_1 = __importDefault(require("bcryptjs"));
-const postSignout = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const postSignout = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const { user_email, user_password } = req.body;
     const user_id = req.session.active_user_id;
     if (!user_email.length || !user_password.length) {
@@ -72,7 +72,7 @@ const postSignout = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
         res.redirect("/users/signup");
     })
         .catch(err => {
-        return res.send("error payload set to" + err);
+        return next(err);
     });
 });
 exports.postSignout = postSignout;

@@ -38,7 +38,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.postSignup = void 0;
 const myModels = __importStar(require("../../models/index"));
 const bcryptjs_1 = __importDefault(require("bcryptjs"));
-const postSignup = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const postSignup = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     //get user credentials from request's body
     const { user_nickname, user_email, user_password } = req.body;
     if (!user_nickname.length || !user_email.length || !user_password.length) {
@@ -63,7 +63,7 @@ const postSignup = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
         req.flash("success", "Successfuly signed in, welcome to JO-Hikes!");
         return res.redirect("/");
     }).catch(err => {
-        return res.send("error payload set to" + err);
+        return next(err);
     });
 });
 exports.postSignup = postSignup;

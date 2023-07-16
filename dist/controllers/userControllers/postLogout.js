@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.postLogout = void 0;
-const postLogout = (req, res) => {
+const postLogout = (req, res, next) => {
     if (!req.session.active_user_email) {
         req.flash("danger", "Already logged out !");
         return res.redirect("/users/login");

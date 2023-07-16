@@ -1,11 +1,12 @@
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import * as myModels from "../../models/index";
 import bcrypt from "bcryptjs";
 
+import expressError from "../../utils/expressError";
 
 
 
-export const postLogin =  async (req: Request, res: Response) => {
+export const postLogin =  async (req: Request, res: Response,next:NextFunction) => {
 
     if (req.session.active_user_email){
         req.flash("danger","Already logged in .");
@@ -27,6 +28,7 @@ export const postLogin =  async (req: Request, res: Response) => {
     {
         req.flash("danger","Email or Password incorrect, try again!");
         return res.redirect("/users/login");
+       
     }
       
 

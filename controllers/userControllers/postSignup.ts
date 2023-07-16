@@ -1,10 +1,10 @@
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import * as myModels from "../../models/index";
 import bcrypt from "bcryptjs";
 
 
 
-export const postSignup = async (req: Request, res: Response) => {
+export const postSignup = async (req: Request, res: Response,next:NextFunction) => {
 
     //get user credentials from request's body
     const { user_nickname, user_email, user_password }: { user_nickname: string, user_email: String, user_password: string } = req.body;
@@ -28,8 +28,6 @@ export const postSignup = async (req: Request, res: Response) => {
 
 
 
-
-
     //generate a salt & hash the password
     const salt: string = bcrypt.genSaltSync(12);
     const hash: string = bcrypt.hashSync(user_password, salt);
@@ -50,7 +48,7 @@ export const postSignup = async (req: Request, res: Response) => {
 
 
     }).catch( err =>{
-        return res.send("error payload set to"+ err);
+        return next(err);
 
     })
 
