@@ -43,7 +43,7 @@ export const postSignup = async (req: Request, res: Response,next:NextFunction) 
 
         
 
-        req.flash("success","Successfuly signed in, welcome to JO-Hikes!");
+        req.flash("success","Successfuly signed in, welcome to GOhiking!");
         return res.redirect("/");
 
 

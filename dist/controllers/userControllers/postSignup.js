@@ -60,7 +60,7 @@ const postSignup = (req, res, next) => __awaiter(void 0, void 0, void 0, functio
         req.session.active_user_email = user_email;
         req.session.active_user_id = data.dataValues.user_id;
         req.session.active_user_nickname = data.dataValues.user_nickname;
-        req.flash("success", "Successfuly signed in, welcome to JO-Hikes!");
+        req.flash("success", "Successfuly signed in, welcome to GOhiking!");
         return res.redirect("/");
     }).catch(err => {
         return next(err);
