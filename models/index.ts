@@ -12,7 +12,7 @@ import { db_handler } from "../database/config";
     },
     user_nickname: {
         type: DataTypes.STRING(512),
-        allowNull: false
+        allowNull: false,
     },
     user_email: {
         type: DataTypes.STRING(512),

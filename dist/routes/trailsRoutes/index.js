@@ -35,13 +35,13 @@ const checkAuthorization_1 = require("../../middlewares/auth/checkAuthorization"
 const checkAuthorization_2 = require("../../middlewares/auth/checkAuthorization");
 const catchAsync_1 = require("../../utils/catchAsync");
 const trailRouter = express_1.default.Router();
-trailRouter.get("/", checkLogin_1.checkLogin, trailControllers.allTrails);
+trailRouter.get("/", checkLogin_1.checkLogin, (0, catchAsync_1.catchAsync)(trailControllers.allTrails));
 trailRouter.get("/new", trailControllers.renderCreateTrail);
-trailRouter.get("/:trail_id", sanitize_1.sanitize, checkLogin_1.checkLogin, trailControllers.viewTrail);
+trailRouter.get("/:trail_id", sanitize_1.sanitize, checkLogin_1.checkLogin, (0, catchAsync_1.catchAsync)(trailControllers.viewTrail));
 trailRouter.get("/:trail_id/reviews", sanitize_1.sanitize, checkLogin_1.checkLogin, reviewControllers.allReviews);
 trailRouter.post("/add", sanitize_1.sanitize, checkLogin_1.checkLogin, (0, catchAsync_1.catchAsync)(trailControllers.addTrail));
-trailRouter.post("/:trail_id/delete", sanitize_1.sanitize, checkLogin_1.checkLogin, checkAuthorization_1.checkAuthorizationForTrail, trailControllers.deleteTrail);
-trailRouter.post("/:trail_id/reviews/add", reviewControllers.addReview);
+trailRouter.post("/:trail_id/delete", sanitize_1.sanitize, checkLogin_1.checkLogin, checkAuthorization_1.checkAuthorizationForTrail, (0, catchAsync_1.catchAsync)(trailControllers.deleteTrail));
+trailRouter.post("/:trail_id/reviews/add", (0, catchAsync_1.catchAsync)(reviewControllers.addReview));
 trailRouter.post("/:trail_id/reviews/:review_id/edit", sanitize_1.sanitize, checkLogin_1.checkLogin, checkAuthorization_2.checkAuthorizationForReview, reviewControllers.editReview);
-trailRouter.post("/:trail_id/reviews/:review_id/delete", sanitize_1.sanitize, checkLogin_1.checkLogin, checkAuthorization_2.checkAuthorizationForReview, reviewControllers.deleteReview);
+trailRouter.post("/:trail_id/reviews/:review_id/delete", sanitize_1.sanitize, checkLogin_1.checkLogin, checkAuthorization_2.checkAuthorizationForReview, (0, catchAsync_1.catchAsync)(reviewControllers.deleteReview));
 exports.default = trailRouter;

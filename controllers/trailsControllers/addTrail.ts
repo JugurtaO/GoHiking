@@ -1,8 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import * as myModels from "../../models/index";
 import axios from 'axios';
-import expressError from "../../utils/expressError";
-import { error } from "console";
+
 
 export async function getLngLat(location: string): Promise<[number, number] | null> {
     const apiKey = String(process.env.TOMTOM_API_KEY); // Replace with your TomTom API key
@@ -48,6 +47,9 @@ export const addTrail = async (req: Request, res: Response,next:NextFunction) =>
       // throw new expressError("difficulty level should be only easy, medium or hard !",500);
 
     }
+
+
+    
 
     //check wether the wanted trail doesn't not already exist -- if not create new trail 
 

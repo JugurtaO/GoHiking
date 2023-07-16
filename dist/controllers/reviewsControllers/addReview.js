@@ -22,10 +22,19 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.addReview = void 0;
 const myModels = __importStar(require("../../models/index"));
-const addReview = (req, res) => {
+const addReview = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const { review_text, review_rating } = req.body;
     const author_id = req.session.active_user_id;
     const { trail_id } = req.params;
@@ -39,7 +48,7 @@ const addReview = (req, res) => {
         req.flash("success", `Thank you for leaving a review`);
         return res.redirect(`/trails/${trail_id}`);
     }).catch(err => {
-        return res.send("error set to " + err);
+        return next(err);
     });
-};
+});
 exports.addReview = addReview;

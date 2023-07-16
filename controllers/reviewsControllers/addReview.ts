@@ -1,7 +1,7 @@
-import { Request,Response } from "express";
+import { NextFunction, Request,Response } from "express";
 import * as myModels from "../../models/index";
 
-export const addReview= (req:Request,res:Response)=>{
+export const addReview= async  (req:Request,res:Response,next:NextFunction)=>{
 
     const {review_text,review_rating}:{review_text:String,review_rating:String}= req.body;
     const author_id=req.session.active_user_id;
@@ -9,7 +9,7 @@ export const addReview= (req:Request,res:Response)=>{
 
    
 
-
+ 
 
 
     if (!review_text.length){
@@ -29,7 +29,7 @@ export const addReview= (req:Request,res:Response)=>{
         return res.redirect(`/trails/${trail_id}`);
         
     }).catch(err=>{
-        return res.send("error set to "+ err);
+        return next(err);
     });
   
 

@@ -1,7 +1,7 @@
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import * as myModels from "../../models/index";
 
-export const allReviews = (req: Request, res: Response) => {
+export const allReviews = async  (req: Request, res: Response, next:NextFunction) => {
 
     const {trail_id}=req.params;
     
@@ -23,7 +23,7 @@ export const allReviews = (req: Request, res: Response) => {
         return res.json(allReviews );
 
     }).catch(err => {
-        return res.send("error payload set to"+ err);
+        return next(err);
     })
 
 

@@ -1,7 +1,7 @@
-import { Request,Response } from "express";
+import { NextFunction, Request,Response } from "express";
 import * as myModels from "../../models/index";
 
-export const deleteReview= async (req:Request,res:Response)=>{
+export const deleteReview= async (req:Request,res:Response,next:NextFunction)=>{
 
     const {review_id,trail_id}=req.params;
 
@@ -30,7 +30,7 @@ export const deleteReview= async (req:Request,res:Response)=>{
         req.flash("success",`Successfuly deleted review.`);
         return res.redirect(`/trails/${trail_id}`)
     }).catch(err=>{
-        return res.send("error set to"+err);
+        return next(err);
     });
   
 

@@ -22,10 +22,19 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.deleteTrail = void 0;
 const myModels = __importStar(require("../../models/index"));
-const deleteTrail = (req, res) => {
+const deleteTrail = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const { trail_id } = req.params;
     //delete hikes and reviews referencing corresponding trail before deleting it itself
     Promise.all([
@@ -36,7 +45,7 @@ const deleteTrail = (req, res) => {
         req.flash("success", `Successfuly deleted trail`);
         return res.redirect("/trails");
     }).catch(err => {
-        return res.send("error payload set to " + err);
+        return next(err);
     });
-};
+});
 exports.deleteTrail = deleteTrail;

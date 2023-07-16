@@ -12,17 +12,17 @@ import {catchAsync} from '../../utils/catchAsync';
 const trailRouter=express.Router();
 
 
-trailRouter.get("/",checkLogin,trailControllers.allTrails);
+trailRouter.get("/",checkLogin,catchAsync(trailControllers.allTrails));
 trailRouter.get("/new",trailControllers.renderCreateTrail);
-trailRouter.get("/:trail_id",sanitize,checkLogin,trailControllers.viewTrail);
+trailRouter.get("/:trail_id",sanitize,checkLogin,catchAsync(trailControllers.viewTrail));
 trailRouter.get("/:trail_id/reviews",sanitize,checkLogin,reviewControllers.allReviews);
 
-trailRouter.post("/add",sanitize,checkLogin, catchAsync( trailControllers.addTrail)); 
-trailRouter.post("/:trail_id/delete",sanitize,checkLogin,checkAuthorizationForTrail,trailControllers.deleteTrail);
+trailRouter.post("/add",sanitize,checkLogin, catchAsync(trailControllers.addTrail)); 
+trailRouter.post("/:trail_id/delete",sanitize,checkLogin,checkAuthorizationForTrail,catchAsync(trailControllers.deleteTrail));
 
-trailRouter.post("/:trail_id/reviews/add",reviewControllers.addReview);
+trailRouter.post("/:trail_id/reviews/add",catchAsync(reviewControllers.addReview));
 trailRouter.post("/:trail_id/reviews/:review_id/edit",sanitize,checkLogin,checkAuthorizationForReview,reviewControllers.editReview);
-trailRouter.post("/:trail_id/reviews/:review_id/delete",sanitize,checkLogin,checkAuthorizationForReview,reviewControllers.deleteReview);
+trailRouter.post("/:trail_id/reviews/:review_id/delete",sanitize,checkLogin,checkAuthorizationForReview,catchAsync(reviewControllers.deleteReview));
 
 
 export default trailRouter;

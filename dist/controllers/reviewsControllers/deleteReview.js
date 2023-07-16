@@ -34,7 +34,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.deleteReview = void 0;
 const myModels = __importStar(require("../../models/index"));
-const deleteReview = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const deleteReview = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const { review_id, trail_id } = req.params;
     const allReviews = yield myModels.Review.findAll({ where: { review_id: review_id } });
     if (!allReviews.length || allReviews.length != 1) {
@@ -50,7 +50,7 @@ const deleteReview = (req, res) => __awaiter(void 0, void 0, void 0, function* (
         req.flash("success", `Successfuly deleted review.`);
         return res.redirect(`/trails/${trail_id}`);
     }).catch(err => {
-        return res.send("error set to" + err);
+        return next(err);
     });
 });
 exports.deleteReview = deleteReview;

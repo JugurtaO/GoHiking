@@ -1,8 +1,8 @@
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import * as myModels from "../../models/index";
 
 
-export const deleteTrail =  (req: Request, res: Response) => {
+export const deleteTrail =  async (req: Request, res: Response,next:NextFunction) => {
 
     const { trail_id } = req.params;
 
@@ -20,7 +20,7 @@ export const deleteTrail =  (req: Request, res: Response) => {
           
 
     }).catch(err=>{
-        return res.send("error payload set to "+ err);
+        return next(err);
     })
 
 
