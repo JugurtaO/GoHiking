@@ -82,7 +82,7 @@ const addTrail = (req, res, next) => __awaiter(void 0, void 0, void 0, function*
     const [longitude, latitude] = yield getLngLat(String(trail_location));
     // now we can create new trail 
     //no need to await the operation the user cannot see the effect behind the scenes
-    const newTrail = myModels.Trail.create({ trail_name: trail_name, trail_location: trail_location, difficulty_level: difficulty_level, trail_image: trail_image, author_id: author_id, trail_longitude: longitude, trail_latitude: latitude })
+    const newTrail = myModels.Trail.create({ trail_name: trail_name, trail_location: trail_location, difficulty_level: difficulty_level, trail_image: trail_image + '/1600x900', author_id: author_id, trail_longitude: longitude, trail_latitude: latitude })
         .then(data => {
         req.flash("success", "Successfuly created trail.");
         return res.redirect(`/trails/${data.dataValues.trail_id}`);
