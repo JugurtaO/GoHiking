@@ -85,7 +85,7 @@
               </div>
             </section>
             <div class="mb-3">
-              <textarea class="form-control" name="review_text" id="review_text" cols="60" rows="3" placeholder="Tell us more about this trail!" autofocus ></textarea>
+              <textarea class="form-control" name="review_text" id="review_text" cols="60" rows="3" placeholder="Tell us more about this trail!" autofocus required ></textarea>
             </div>
             <button class="btn btn-outline-success btn-lg mt-5 ">Post</button>
 
@@ -97,22 +97,6 @@
     </div>
 
 
-    <!-- <% allReviews.forEach(review => { %>
-      <div class="card mb-3">
-        <div class=" card-body">
-          <h6 class="card-subtitle mb-2 text-muted"> <%= review.User.user_nickname %></h6>
-          <p class="starability-result" data-rating="<%= review.review_rating %>">
-            <%= review.review_rating %> stars
-            </p>
-            <p class="card-text"> <%= review.review_text %></p>
-        <form action="/trails/<%= Trail.trail_id %>/reviews/<%= review.review_id%>/delete" method="post">
-          <button class="btn btn-sm btn-danger" style="color: white;">Delete</button>
-          </form>
-      </div>
-    </div>
-
-    
-    <% }) %> -->
     <section style="color: #000; background-color: #f3f2f2;">
       <div class="container py-5">
         <div class="row d-flex justify-content-center">

@@ -13,7 +13,6 @@ export const addReview= async  (req:Request,res:Response,next:NextFunction)=>{
 
 
     if (!review_text.length){
-        
         req.flash("danger",`Review cannot be blank !`);
         return res.redirect(`/trails/${trail_id}`);
         
