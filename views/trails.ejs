@@ -73,11 +73,11 @@
         <div class="card-body">
           <a class="col-xs-6 col-lg-4" href="/trails/<%=trail.trail_id %>">
           <!--Title-->
-          <h4 class="card-title"><%= trail.trail_name %></h4>
+          <h2 class="card-title"><%= trail.trail_name %></h2>
           <!--Text-->
-          <p class="card-text text-muted">
+          <h4 class="card-text text-muted">
             <%= trail.trail_location %>
-        </p>
+          </h4>
           <!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
           <button type="button" class="btn btn-outline-success btn-md" >View <%= trail.trail_name %>
         </button>
