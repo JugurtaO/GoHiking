@@ -55,7 +55,6 @@ db_handler.authenticate().then(() => {
 
 
 /** SETUP OUR SESSIONS */
-// console.log("mongo URL:",String(process.env.MONGO_ATLAS_SESSION_STORE_URL));
 const sessionOption = {
     name: String(process.env.SESSION_NAME),
     secret: String(process.env.SESSION_SECRET),
@@ -83,9 +82,7 @@ app.use((req:Request, res:Response, next:Function) => {
     res.locals.active_user_email = req.session.active_user_email;
     res.locals.active_user_id = req.session.active_user_id;
     res.locals.active_user_nickname=req.session.active_user_nickname;
-    
-    // console.log("success >>",res.locals.success);
-    // console.log("danger >>",res.locals.danger);
+
     
     next()
 })
