@@ -66,7 +66,7 @@ app.all('*', (req, res, next) => {
 });
 app.use((err, req, res, next) => {
     const { statusCode = 500, message = 'Something went wrong' } = err;
-    res.status(statusCode).send("Oh booy " + message);
+    res.status(statusCode).send(message);
 });
 //make our app listen on port 3000
 const PORT = process.env.PORT || 3000;

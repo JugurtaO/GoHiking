@@ -99,7 +99,7 @@ app.all('*',(req:Request,res:Response,next:NextFunction)=>{
 
 app.use((err:expressError,req:Request,res:Response,next:NextFunction) =>{
     const {statusCode=500,message='Something went wrong'}=err;
-    res.status(statusCode).send("Oh booy "+ message);
+    res.status(statusCode).send(message);
 });
 
 
