@@ -101,8 +101,7 @@ app.use((err:expressError,req:Request,res:Response,next:NextFunction) =>{
     const {statusCode=500,message='Something went wrong'}=err;
     res.status(statusCode).send(message);
 });
-
-
+ 
 
 //make our app listen on port 3000
 const PORT = process.env.PORT || 3000;
