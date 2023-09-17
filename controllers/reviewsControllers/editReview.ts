@@ -1,7 +1,7 @@
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import * as myModels from "../../models/index";
 
-export const editReview = async (req: Request, res: Response) => {
+export const editReview = async (req: Request, res: Response,next:NextFunction) => {
 
     const { new_review_text,new_review_rating }: { new_review_text: String,new_review_rating:String } = req.body;
     const { review_id } = req.params;
