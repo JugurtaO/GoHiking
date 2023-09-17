@@ -34,7 +34,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.editReview = void 0;
 const myModels = __importStar(require("../../models/index"));
-const editReview = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const editReview = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const { new_review_text, new_review_rating } = req.body;
     const { review_id } = req.params;
     if (!new_review_text.length)

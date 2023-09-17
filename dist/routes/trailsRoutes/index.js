@@ -42,6 +42,6 @@ trailRouter.get("/:trail_id/reviews", sanitize_1.sanitize, checkLogin_1.checkLog
 trailRouter.post("/add", sanitize_1.sanitize, checkLogin_1.checkLogin, (0, catchAsync_1.catchAsync)(trailControllers.addTrail));
 trailRouter.post("/:trail_id/delete", sanitize_1.sanitize, checkLogin_1.checkLogin, checkAuthorization_1.checkAuthorizationForTrail, (0, catchAsync_1.catchAsync)(trailControllers.deleteTrail));
 trailRouter.post("/:trail_id/reviews/add", (0, catchAsync_1.catchAsync)(reviewControllers.addReview));
-trailRouter.post("/:trail_id/reviews/:review_id/edit", sanitize_1.sanitize, checkLogin_1.checkLogin, checkAuthorization_2.checkAuthorizationForReview, reviewControllers.editReview);
+trailRouter.post("/:trail_id/reviews/:review_id/edit", sanitize_1.sanitize, checkLogin_1.checkLogin, checkAuthorization_2.checkAuthorizationForReview, (0, catchAsync_1.catchAsync)(reviewControllers.editReview));
 trailRouter.post("/:trail_id/reviews/:review_id/delete", sanitize_1.sanitize, checkLogin_1.checkLogin, checkAuthorization_2.checkAuthorizationForReview, (0, catchAsync_1.catchAsync)(reviewControllers.deleteReview));
 exports.default = trailRouter;
