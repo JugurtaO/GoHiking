@@ -54,7 +54,7 @@ db_handler.authenticate().then(() => {
 });
 
 
-/** SETUP OUR SESSIONS */
+// /** SETUP OUR SESSIONS */
 const sessionOption = {
     name: String(process.env.SESSION_NAME),
     secret: String(process.env.SESSION_SECRET),
