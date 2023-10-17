@@ -93,14 +93,14 @@ import Router from "./routes/index";
 app.use(Router);
 
 //errors handling middlwares 
-// app.all('*',(req:Request,res:Response,next:NextFunction)=>{
-//     next(new expressError("Not Found",404));
-// })
+app.all('*',(req:Request,res:Response,next:NextFunction)=>{
+    next(new expressError("Not Found",404));
+})
 
-// app.use((err:expressError,req:Request,res:Response,next:NextFunction) =>{
-//     const {statusCode=500,message='Something went wrong'}=err;
-//     res.status(statusCode).send(message);
-// });  
+app.use((err:expressError,req:Request,res:Response,next:NextFunction) =>{
+    const {statusCode=500,message='Something went wrong'}=err;
+    res.status(statusCode).send(message);
+});  
 
  
 

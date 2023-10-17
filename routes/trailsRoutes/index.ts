@@ -17,7 +17,7 @@ trailRouter.get("/new",trailControllers.renderCreateTrail);
 trailRouter.get("/:trail_id",sanitize,checkLogin,catchAsync(trailControllers.viewTrail));
 trailRouter.get("/:trail_id/reviews",sanitize,checkLogin,reviewControllers.allReviews);
 
-trailRouter.post("/add",sanitize,checkLogin, trailControllers.addTrail); 
+trailRouter.post("/add",sanitize,checkLogin, catchAsync(trailControllers.addTrail)); 
 trailRouter.post("/:trail_id/delete",sanitize,checkLogin,checkAuthorizationForTrail,catchAsync(trailControllers.deleteTrail));
 
 trailRouter.post("/:trail_id/reviews/add",catchAsync(reviewControllers.addReview));
