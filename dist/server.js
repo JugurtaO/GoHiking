@@ -32,7 +32,7 @@ config_1.db_handler.authenticate().then(() => {
 }).catch((error) => {
     console.error('Ouups, cannot get connection to MySQL server!' + error.message);
 });
-/** SETUP OUR SESSIONS */
+// /** SETUP OUR SESSIONS */
 const sessionOption = {
     name: String(process.env.SESSION_NAME),
     secret: String(process.env.SESSION_SECRET),
