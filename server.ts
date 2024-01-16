@@ -7,12 +7,12 @@ import dotenv from "dotenv";
 import path from "path";
 import flash from "connect-flash";
 
-//creating express app 
+//creating express app
 const app = express();
 
 
 
-// Set up middlewars 
+// Set up middlewares 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.set('view engine','ejs');
@@ -37,11 +37,6 @@ import mongostore from "connect-mongo";
 //dontenv configured and requiring db_handler 
 dotenv.config();
 import { db_handler } from "./database/config";
-
-
-// SETUP OUR EXPRESS APP SETTINGS 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
 
 
 
